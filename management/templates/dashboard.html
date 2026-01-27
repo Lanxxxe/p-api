@@ -1,0 +1,251 @@
+{% extends 'base.html' %}
+
+{% block title %}Portfolio Admin | Dashboard{% endblock %}
+
+{% block nav_dashboard %}bg-blue-950 border-l-4 border-blue-500{% endblock %}
+
+{% block content %}
+            <!-- Header -->
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-3xl font-bold text-blue-300 glow-text">&gt; DASHBOARD</h2>
+                    <p class="text-blue-600 terminal-text mt-1">System initialized. Welcome back, Commander.</p>
+                </div>
+                <div class="text-sm text-blue-600 terminal-text">
+                    <span class="text-green-400">●</span> LAST_UPDATE: 2026-01-11 14:32:10
+                </div>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Total Projects Card -->
+                <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg p-6 glow-border hover-glow transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 bg-blue-900 bg-opacity-30 rounded-lg">
+                            <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-green-400 text-sm terminal-text">+12.5%</span>
+                    </div>
+                    <h3 class="text-blue-600 text-sm uppercase tracking-wider">Total Projects</h3>
+                    <p id="totalProjectsCount" class="text-4xl font-bold text-blue-300 mt-2 glow-text">24</p>
+                    <div class="gradient-line mt-4"></div>
+                </div>
+                
+                <!-- Total Visitors Card -->
+                <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg p-6 glow-border hover-glow transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 bg-blue-900 bg-opacity-30 rounded-lg">
+                            <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-green-400 text-sm terminal-text">+8.2%</span>
+                    </div>
+                    <h3 class="text-blue-600 text-sm uppercase tracking-wider">Total Visitors</h3>
+                    <p id="totalVisitorsCount" class="text-4xl font-bold text-blue-300 mt-2 glow-text">15.2K</p>
+                    <div class="gradient-line mt-4"></div>
+                </div>
+                
+                <!-- Active Projects Card -->
+                <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg p-6 glow-border hover-glow transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 bg-blue-900 bg-opacity-30 rounded-lg">
+                            <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-blue-400 text-sm terminal-text">STABLE</span>
+                    </div>
+                    <h3 class="text-blue-600 text-sm uppercase tracking-wider">Active Projects</h3>
+                    <p id="totalProjectsCount" class="text-4xl font-bold text-blue-300 mt-2 glow-text">18</p>
+                    <div class="gradient-line mt-4"></div>
+                </div>
+            </div>
+            
+            <!-- Projects Table -->
+            <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg p-6 glow-border">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-bold text-blue-300 terminal-text">&gt; PROJECTS_MANAGER</h3>
+                    <button class="bg-blue-900 hover:bg-blue-800 text-blue-300 px-4 py-2 rounded border border-blue-700 hover-glow transition-all">
+                        + NEW PROJECT
+                    </button>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="border-b border-blue-900">
+                                <th class="pb-3 text-blue-500 font-semibold text-sm uppercase tracking-wider">Project Name</th>
+                                <th class="pb-3 text-blue-500 font-semibold text-sm uppercase tracking-wider">Status</th>
+                                <th class="pb-3 text-blue-500 font-semibold text-sm uppercase tracking-wider">Last Updated</th>
+                                <th class="pb-3 text-blue-500 font-semibold text-sm uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-blue-900">
+                            
+                            <tr class="hover:bg-blue-950 hover:bg-opacity-30 transition-all">
+                                <td class="py-4 text-blue-300">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-blue-600">[01]</span>
+                                        <span>E-Commerce Platform</span>
+                                    </div>
+                                </td>
+                                <td class="py-4">
+                                    <span class="px-3 py-1 bg-green-900 bg-opacity-30 text-green-400 rounded-full text-xs border border-green-700">ACTIVE</span>
+                                </td>
+                                <td class="py-4 text-blue-400 text-sm terminal-text">2026-01-10 18:45</td>
+                                <td class="py-4">
+                                    <div class="flex space-x-2">
+                                        <button class="p-2 hover:bg-blue-900 rounded hover-glow transition-all" title="Edit">
+                                            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                            </svg>
+                                        </button>
+                                        <button class="p-2 hover:bg-blue-900 rounded hover-glow transition-all" title="View">
+                                            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                            </svg>
+                                        </button>
+                                        <button class="p-2 hover:bg-red-900 rounded hover-glow transition-all" title="Delete">
+                                            <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-blue-950 hover:bg-opacity-30 transition-all">
+                                <td class="py-4 text-blue-300">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-blue-600">[02]</span>
+                                        <span>Machine Learning Dashboard</span>
+                                    </div>
+                                </td>
+                                <td class="py-4">
+                                    <span class="px-3 py-1 bg-yellow-900 bg-opacity-30 text-yellow-400 rounded-full text-xs border border-yellow-700">IN PROGRESS</span>
+                                </td>
+                                <td class="py-4 text-blue-400 text-sm terminal-text">2026-01-09 12:30</td>
+                                <td class="py-4">
+                                    <div class="flex space-x-2">
+                                        <button class="p-2 hover:bg-blue-900 rounded hover-glow transition-all" title="Edit">
+                                            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                            </svg>
+                                        </button>
+                                        <button class="p-2 hover:bg-blue-900 rounded hover-glow transition-all" title="View">
+                                            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                            </svg>
+                                        </button>
+                                        <button class="p-2 hover:bg-red-900 rounded hover-glow transition-all" title="Delete">
+                                            <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-blue-950 hover:bg-opacity-30 transition-all">
+                                <td class="py-4 text-blue-300">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-blue-600">[03]</span>
+                                        <span>Portfolio Website V2</span>
+                                    </div>
+                                </td>
+                                <td class="py-4">
+                                    <span class="px-3 py-1 bg-green-900 bg-opacity-30 text-green-400 rounded-full text-xs border border-green-700">ACTIVE</span>
+                                </td>
+                                <td class="py-4 text-blue-400 text-sm terminal-text">2026-01-11 09:15</td>
+                                <td class="py-4">
+                                    <div class="flex space-x-2">
+                                        <button class="p-2 hover:bg-blue-900 rounded hover-glow transition-all" title="Edit">
+                                            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                            </svg>
+                                        </button>
+                                        <button class="p-2 hover:bg-blue-900 rounded hover-glow transition-all" title="View">
+                                            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                            </svg>
+                                        </button>
+                                        <button class="p-2 hover:bg-red-900 rounded hover-glow transition-all" title="Delete">
+                                            <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-blue-950 hover:bg-opacity-30 transition-all">
+                                <td class="py-4 text-blue-300">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-blue-600">[04]</span>
+                                        <span>Mobile App Backend</span>
+                                    </div>
+                                </td>
+                                <td class="py-4">
+                                    <span class="px-3 py-1 bg-red-900 bg-opacity-30 text-red-400 rounded-full text-xs border border-red-700">MAINTENANCE</span>
+                                </td>
+                                <td class="py-4 text-blue-400 text-sm terminal-text">2026-01-05 14:22</td>
+                                <td class="py-4">
+                                    <div class="flex space-x-2">
+                                        <button class="p-2 hover:bg-blue-900 rounded hover-glow transition-all" title="Edit">
+                                            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                            </svg>
+                                        </button>
+                                        <button class="p-2 hover:bg-blue-900 rounded hover-glow transition-all" title="View">
+                                            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                            </svg>
+                                        </button>
+                                        <button class="p-2 hover:bg-red-900 rounded hover-glow transition-all" title="Delete">
+                                            <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Terminal Code Preview Section -->
+            <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg glow-border overflow-hidden">
+                <div class="bg-black bg-opacity-60 px-4 py-2 flex items-center justify-between border-b border-blue-900">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3 h-3 bg-red-500 rounded-full"></span>
+                        <span class="w-3 h-3 bg-yellow-500 rounded-full"></span>
+                        <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+                        <span class="ml-4 text-blue-400 text-sm terminal-text">terminal@portfolio:~$</span>
+                    </div>
+                    <button class="text-blue-500 text-xs hover:text-blue-300 transition-colors">COPY</button>
+                </div>
+                <div class="p-4 terminal-text text-sm overflow-x-auto">
+                    <pre class="text-blue-400"><span class="text-blue-600"># Latest Project Code Preview</span>
+                    <span class="text-green-400">def</span> <span class="text-blue-300">initialize_portfolio</span>():
+                        <span class="text-blue-500">"""Initialize portfolio system"""</span>
+                        config = {
+                            <span class="text-yellow-400">'mode'</span>: <span class="text-yellow-400">'production'</span>,
+                            <span class="text-yellow-400">'debug'</span>: <span class="text-red-400">False</span>,
+                            <span class="text-yellow-400">'version'</span>: <span class="text-yellow-400">'2.0.1'</span>
+                        }
+                        
+                        <span class="text-purple-400">print</span>(<span class="text-yellow-400">f"System initialized: {config['version']}"</span>)
+                        <span class="text-green-400">return</span> config
+
+                    <span class="text-blue-600"># Execute system</span>
+                    system = <span class="text-blue-300">initialize_portfolio</span>()
+                    <span class="text-purple-400">print</span>(<span class="text-yellow-400">"Status: ONLINE"</span>)
+                    <span class="text-green-400">&gt;&gt;&gt;</span> <span class="text-blue-300 pulse-glow">_</span></pre>
+                </div>
+            </div>
+{% endblock %}

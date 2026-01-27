@@ -1,0 +1,363 @@
+{% extends 'base.html' %}
+
+{% block title %}Portfolio Admin | Projects{% endblock %}
+
+{% block nav_inquiries %}bg-blue-950 border-l-4 border-blue-500{% endblock %}
+
+{% block content %}
+<!-- Header -->
+<div class="flex items-center justify-between">
+    <div>
+        <h2 class="text-3xl font-bold text-blue-300 glow-text">&gt; INQUIRIES</h2>
+        <p class="text-blue-600 terminal-text mt-1">Manage visitor messages and inquiries</p>
+    </div>
+    <div class="flex space-x-3">
+        <button class="bg-blue-950 hover:bg-blue-900 text-blue-300 px-4 py-3 rounded border border-blue-800 hover-glow transition-all font-semibold">
+            <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+            </svg>
+            Filter
+        </button>
+        <button class="bg-red-950 hover:bg-red-900 text-red-400 px-4 py-3 rounded border border-red-800 hover-glow transition-all font-semibold">
+            Mark All Read
+        </button>
+    </div>
+</div>
+
+<!-- Stats Overview -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+    <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg p-6 glow-border hover-glow transition-all">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-blue-600 text-sm uppercase tracking-wider">Total Inquiries</p>
+                <p class="text-3xl font-bold text-blue-300 mt-2 glow-text">47</p>
+            </div>
+            <svg class="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+        </div>
+    </div>
+    
+    <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg p-6 glow-border hover-glow transition-all">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-blue-600 text-sm uppercase tracking-wider">Unread</p>
+                <p class="text-3xl font-bold text-blue-300 mt-2 glow-text">12</p>
+            </div>
+            <div class="relative">
+                <svg class="w-12 h-12 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+                </svg>
+                <span class="absolute -top-1 -right-1 w-4 h-4 bg-yellow-500 rounded-full pulse-glow"></span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg p-6 glow-border hover-glow transition-all">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-blue-600 text-sm uppercase tracking-wider">Replied</p>
+                <p class="text-3xl font-bold text-blue-300 mt-2 glow-text">28</p>
+            </div>
+            <svg class="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+        </div>
+    </div>
+    
+    <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg p-6 glow-border hover-glow transition-all">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-blue-600 text-sm uppercase tracking-wider">Archived</p>
+                <p class="text-3xl font-bold text-blue-300 mt-2 glow-text">7</p>
+            </div>
+            <svg class="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
+            </svg>
+        </div>
+    </div>
+</div>
+
+<!-- Inquiries Table -->
+<div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg glow-border overflow-hidden">
+    <div class="p-6 border-b border-blue-900">
+        <div class="flex items-center justify-between">
+            <h3 class="text-xl font-bold text-blue-300 terminal-text">&gt; MESSAGE_QUEUE</h3>
+            <div class="flex items-center space-x-3">
+                <select class="bg-black bg-opacity-50 border border-blue-800 rounded px-3 py-2 text-blue-300 text-sm focus:outline-none focus:border-blue-500 terminal-text">
+                    <option>All Status</option>
+                    <option>Unread</option>
+                    <option>Read</option>
+                    <option>Replied</option>
+                    <option>Archived</option>
+                </select>
+                <input type="text" placeholder="Search messages..." class="bg-black bg-opacity-50 border border-blue-800 rounded px-3 py-2 text-blue-300 placeholder-blue-700 text-sm focus:outline-none focus:border-blue-500 terminal-text">
+            </div>
+        </div>
+    </div>
+    
+    <div class="overflow-x-auto">
+        <table class="w-full">
+            <thead>
+                <tr class="border-b border-blue-900 bg-blue-950 bg-opacity-30">
+                    <th class="px-6 py-4 text-left text-blue-500 font-semibold text-sm uppercase tracking-wider">
+                        <input type="checkbox" class="w-4 h-4 bg-black border border-blue-800 rounded">
+                    </th>
+                    <th class="px-6 py-4 text-left text-blue-500 font-semibold text-sm uppercase tracking-wider">From</th>
+                    <th class="px-6 py-4 text-left text-blue-500 font-semibold text-sm uppercase tracking-wider">Subject</th>
+                    <th class="px-6 py-4 text-left text-blue-500 font-semibold text-sm uppercase tracking-wider">Status</th>
+                    <th class="px-6 py-4 text-left text-blue-500 font-semibold text-sm uppercase tracking-wider">Date</th>
+                    <th class="px-6 py-4 text-left text-blue-500 font-semibold text-sm uppercase tracking-wider">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-blue-900">
+                <!-- Message 1 - Unread -->
+                <tr class="hover:bg-blue-950 hover:bg-opacity-30 transition-all bg-blue-900 bg-opacity-10">
+                    <td class="px-6 py-4">
+                        <input type="checkbox" class="w-4 h-4 bg-black border border-blue-800 rounded">
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-blue-900 flex items-center justify-center text-blue-300 font-bold glow-border">
+                                JD
+                            </div>
+                            <div>
+                                <p class="text-blue-300 font-semibold">John Doe</p>
+                                <p class="text-blue-600 text-xs terminal-text">john.doe@email.com</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <p class="text-blue-300 font-semibold">Project Collaboration Inquiry</p>
+                        <p class="text-blue-600 text-sm truncate max-w-md">Hi, I'm interested in discussing a potential collaboration...</p>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="px-3 py-1 bg-yellow-900 bg-opacity-30 text-yellow-400 rounded-full text-xs border border-yellow-700 pulse-glow">UNREAD</span>
+                    </td>
+                    <td class="px-6 py-4 text-blue-400 text-sm terminal-text">2026-01-15 10:30</td>
+                    <td class="px-6 py-4">
+                        <div class="flex space-x-2">
+                            <button class="p-2 hover:bg-blue-900 rounded hover-glow transition-all" title="View">
+                                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                </svg>
+                            </button>
+                            <button class="p-2 hover:bg-green-900 rounded hover-glow transition-all" title="Reply">
+                                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
+                                </svg>
+                            </button>
+                            <button class="p-2 hover:bg-red-900 rounded hover-glow transition-all" title="Delete">
+                                <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Message 2 - Read -->
+                <tr class="hover:bg-blue-950 hover:bg-opacity-30 transition-all">
+                    <td class="px-6 py-4">
+                        <input type="checkbox" class="w-4 h-4 bg-black border border-blue-800 rounded">
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-blue-900 flex items-center justify-center text-blue-300 font-bold glow-border">
+                                SA
+                            </div>
+                            <div>
+                                <p class="text-blue-300 font-semibold">Sarah Anderson</p>
+                                <p class="text-blue-600 text-xs terminal-text">sarah.a@company.com</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <p class="text-blue-300">Job Opportunity</p>
+                        <p class="text-blue-600 text-sm truncate max-w-md">We have an exciting opportunity that matches your skills...</p>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="px-3 py-1 bg-blue-900 bg-opacity-30 text-blue-400 rounded-full text-xs border border-blue-700">READ</span>
+                    </td>
+                    <td class="px-6 py-4 text-blue-400 text-sm terminal-text">2026-01-14 16:45</td>
+                    <td class="px-6 py-4">
+                        <div class="flex space-x-2">
+                            <button class="p-2 hover:bg-blue-900 rounded hover-glow transition-all" title="View">
+                                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                </svg>
+                            </button>
+                            <button class="p-2 hover:bg-green-900 rounded hover-glow transition-all" title="Reply">
+                                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
+                                </svg>
+                            </button>
+                            <button class="p-2 hover:bg-red-900 rounded hover-glow transition-all" title="Delete">
+                                <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Message 3 - Replied -->
+                <tr class="hover:bg-blue-950 hover:bg-opacity-30 transition-all">
+                    <td class="px-6 py-4">
+                        <input type="checkbox" class="w-4 h-4 bg-black border border-blue-800 rounded">
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-blue-900 flex items-center justify-center text-blue-300 font-bold glow-border">
+                                MJ
+                            </div>
+                            <div>
+                                <p class="text-blue-300 font-semibold">Michael Johnson</p>
+                                <p class="text-blue-600 text-xs terminal-text">m.johnson@startup.io</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <p class="text-blue-300">Technical Consultation Request</p>
+                        <p class="text-blue-600 text-sm truncate max-w-md">Looking for expert advice on our architecture...</p>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="px-3 py-1 bg-green-900 bg-opacity-30 text-green-400 rounded-full text-xs border border-green-700">REPLIED</span>
+                    </td>
+                    <td class="px-6 py-4 text-blue-400 text-sm terminal-text">2026-01-13 09:20</td>
+                    <td class="px-6 py-4">
+                        <div class="flex space-x-2">
+                            <button class="p-2 hover:bg-blue-900 rounded hover-glow transition-all" title="View">
+                                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                </svg>
+                            </button>
+                            <button class="p-2 hover:bg-green-900 rounded hover-glow transition-all" title="Reply">
+                                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
+                                </svg>
+                            </button>
+                            <button class="p-2 hover:bg-red-900 rounded hover-glow transition-all" title="Delete">
+                                <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Message 4 - Unread -->
+                <tr class="hover:bg-blue-950 hover:bg-opacity-30 transition-all bg-blue-900 bg-opacity-10">
+                    <td class="px-6 py-4">
+                        <input type="checkbox" class="w-4 h-4 bg-black border border-blue-800 rounded">
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-blue-900 flex items-center justify-center text-blue-300 font-bold glow-border">
+                                EW
+                            </div>
+                            <div>
+                                <p class="text-blue-300 font-semibold">Emily White</p>
+                                <p class="text-blue-600 text-xs terminal-text">emily.w@design.co</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <p class="text-blue-300 font-semibold">Portfolio Design Feedback</p>
+                        <p class="text-blue-600 text-sm truncate max-w-md">Love your portfolio! Would like to discuss design patterns...</p>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="px-3 py-1 bg-yellow-900 bg-opacity-30 text-yellow-400 rounded-full text-xs border border-yellow-700 pulse-glow">UNREAD</span>
+                    </td>
+                    <td class="px-6 py-4 text-blue-400 text-sm terminal-text">2026-01-15 08:15</td>
+                    <td class="px-6 py-4">
+                        <div class="flex space-x-2">
+                            <button class="p-2 hover:bg-blue-900 rounded hover-glow transition-all" title="View">
+                                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                </svg>
+                            </button>
+                            <button class="p-2 hover:bg-green-900 rounded hover-glow transition-all" title="Reply">
+                                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
+                                </svg>
+                            </button>
+                            <button class="p-2 hover:bg-red-900 rounded hover-glow transition-all" title="Delete">
+                                <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Message 5 - Read -->
+                <tr class="hover:bg-blue-950 hover:bg-opacity-30 transition-all">
+                    <td class="px-6 py-4">
+                        <input type="checkbox" class="w-4 h-4 bg-black border border-blue-800 rounded">
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-blue-900 flex items-center justify-center text-blue-300 font-bold glow-border">
+                                DB
+                            </div>
+                            <div>
+                                <p class="text-blue-300 font-semibold">David Brown</p>
+                                <p class="text-blue-600 text-xs terminal-text">d.brown@tech.com</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <p class="text-blue-300">Question About Your Project</p>
+                        <p class="text-blue-600 text-sm truncate max-w-md">I noticed your e-commerce platform project...</p>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="px-3 py-1 bg-blue-900 bg-opacity-30 text-blue-400 rounded-full text-xs border border-blue-700">READ</span>
+                    </td>
+                    <td class="px-6 py-4 text-blue-400 text-sm terminal-text">2026-01-12 14:30</td>
+                    <td class="px-6 py-4">
+                        <div class="flex space-x-2">
+                            <button class="p-2 hover:bg-blue-900 rounded hover-glow transition-all" title="View">
+                                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                </svg>
+                            </button>
+                            <button class="p-2 hover:bg-green-900 rounded hover-glow transition-all" title="Reply">
+                                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
+                                </svg>
+                            </button>
+                            <button class="p-2 hover:bg-red-900 rounded hover-glow transition-all" title="Delete">
+                                <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Pagination -->
+    <div class="p-4 border-t border-blue-900 flex items-center justify-between">
+        <p class="text-blue-500 text-sm terminal-text">Showing 1-5 of 47 inquiries</p>
+        <div class="flex space-x-2">
+            <button class="px-4 py-2 bg-blue-950 hover:bg-blue-900 text-blue-400 rounded border border-blue-800 hover-glow transition-all text-sm terminal-text">
+                Previous
+            </button>
+            <button class="px-4 py-2 bg-blue-900 text-blue-300 rounded border border-blue-700 text-sm terminal-text">1</button>
+            <button class="px-4 py-2 bg-blue-950 hover:bg-blue-900 text-blue-400 rounded border border-blue-800 hover-glow transition-all text-sm terminal-text">2</button>
+            <button class="px-4 py-2 bg-blue-950 hover:bg-blue-900 text-blue-400 rounded border border-blue-800 hover-glow transition-all text-sm terminal-text">3</button>
+            <button class="px-4 py-2 bg-blue-950 hover:bg-blue-900 text-blue-400 rounded border border-blue-800 hover-glow transition-all text-sm terminal-text">
+                Next
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
