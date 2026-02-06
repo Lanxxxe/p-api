@@ -1,32 +1,39 @@
 from django.urls import path
-from . import views
+from .views import auth, dashboard, projects, achievements, tools, inquiries, internship
 
 urlpatterns = [
-    path('login/', views.login, name='login'),
-    path('dashboard/', views.dashboard, name='dashboard'),
+    path('', auth.login, name='login'),
+    path('dashboard/', dashboard.dashboard, name='dashboard'),
+
 
     # Project
-    path('projects/', views.projects, name='projects'),
-    path('projects/add/', views.add_project, name='add_project'),
-    path('projects/edit/<int:project_id>/', views.edit_project, name='edit_project'),
+    path('projects/', projects.projects, name='projects'),
+    path('projects/add/', projects.add_project, name='add_project'),
+    path('projects/edit/<int:project_id>/', projects.edit_project, name='edit_project'),
+    path('projects/delete/<int:project_id>/', projects.delete_project, name='delete_project'),
 
     # Achievement
-    path('achievements/', views.achievements, name='achievements'),
-    path('achievements/add/', views.add_achievement, name='add_achievement'),
-    path('achievements/edit/', views.edit_achievement, name='edit_achievement'),
+    path('achievements/', achievements.achievements, name='achievements'),
+    path('achievements/add/', achievements.add_achievement, name='add_achievement'),
+    path('achievements/edit/', achievements.edit_achievement, name='edit_achievement'),
     # path('achievements/delete/', views.delete_achievement, name='delete_achievement'),
 
     # Tools
-    path('tools/', views.tools, name='tools'),
-    path('tools/add/', views.add_tool, name='add_tool'),
-    path('tools/edit/', views.edit_tool, name='edit_tool'),
+    path('tools/', tools.tools, name='tools'),
+    path('tools/add/', tools.add_tool, name='add_tool'),
+    path('tools/edit/', tools.edit_tool, name='edit_tool'),
     # path('tools/delete/', views.delete_tool, name='delete_tool'),
 
     # Inquiries
-    path('inquiries/', views.inquiries, name='inquiries'),
+    path('inquiries/', inquiries.inquiries, name='inquiries'),
 
     # Internship
-    path('internship/', views.internship, name='internship'),
+    path('internship/', internship.internship, name='internship'),
+    path('internship/create/', internship.log_create, name='internship-log-create'),
+    path('internship/statistics/', internship.log_statistics, name='internship-log-statistics'),
+    path('internship/<int:log_id>/', internship.log_detail, name='internship-log-detail'),
+    path('internship/<int:log_id>/update/', internship.log_update, name='internship-log-update'),
+    path('internship/<int:log_id>/delete/', internship.log_delete, name='internship-log-delete'),
 
-    path('logout/', views.logout, name='logout'),
+    path('logout/', auth.logout, name='logout'),
 ]

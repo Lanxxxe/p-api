@@ -26,11 +26,11 @@
         <span class="w-3 h-3 bg-red-500 rounded-full"></span>
         <span class="w-3 h-3 bg-yellow-500 rounded-full"></span>
         <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-        <span class="ml-4 text-blue-400 text-sm terminal-text">project_manager@system:~$ create_project</span>
+        <span class="ml-4 text-blue-400 text-sm terminal-text">admin@system:~$ create_project</span>
     </div>
     
     <!-- Form -->
-    <form id="addProjectForm" class="p-8 space-y-6">
+    <form id="addProjectForm" method="POST" class="p-8 space-y-6">
         {% csrf_token %}
         
         <!-- Project Name -->
@@ -212,20 +212,6 @@
             <p class="text-blue-600 text-xs mt-2 terminal-text">• Select all categories that apply to this project</p>
         </div>
         
-        <!-- Error Messages -->
-        {% if error %}
-        <div class="bg-red-900 bg-opacity-30 border border-red-700 rounded p-4 text-red-400 text-sm terminal-text">
-            <span class="font-bold">ERROR:</span> {{ error }}
-        </div>
-        {% endif %}
-        
-        <!-- Success Messages -->
-        {% if success %}
-        <div class="bg-green-900 bg-opacity-30 border border-green-700 rounded p-4 text-green-400 text-sm terminal-text">
-            <span class="font-bold">SUCCESS:</span> {{ success }}
-        </div>
-        {% endif %}
-        
         <!-- Action Buttons -->
         <div class="flex space-x-4 pt-4 border-t border-blue-900">
             <button 
@@ -263,64 +249,4 @@
         <p>• Project URL should link to live demo or repository</p>
     </div>
 </div>
-{% endblock %}
-
-{% block extra_scripts %}
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('addProjectForm');
-        
-        form.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent default form submission
-            
-            // Get form values
-            const projectName = form.project_name.value.trim();
-            const summary = form.summary.value.trim();
-            const description = form.description.value.trim();
-            const languages = form.languages.value.trim();
-            const projectUrl = form.project_url.value.trim();
-            const projectImage = form.project_image.value.trim();
-            const token = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
-            
-            // Validation
-            if (!projectName || !summary || !description || !languages || !projectUrl || !projectImage) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            // Collect selected categories
-            const categories = Array.from(form.querySelectorAll('input[name="category"]:checked')).map(cb => cb.value);
-            
-            // Prepare data
-            const data = {
-                project_name: projectName,
-                summary: summary,
-                description: description,
-                languages: languages,
-                project_url: projectUrl,
-                project_image: projectImage,
-                category: categories
-            };
-            
-            // Post data using API
-            sendData('projects/', token, data)
-                .then(response => {
-                    if (response && response.id) {
-                        alert('Project created successfully!');
-                        form.reset();
-                        // Optionally redirect to projects page
-                        window.location.href = "{% url 'projects' %}";
-                    } else {
-                        alert('Error creating project. Please try again.');
-                        console.log('Response:', response);
-                    }
-                })
-                .catch(error => {
-                    alert('Error: ' + error.message);
-                    console.log('Error:', error);
-                });
-        });
-    });
-</script>
-
 {% endblock %}
