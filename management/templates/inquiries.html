@@ -1,24 +1,24 @@
 {% extends 'base.html' %}
 
-{% block title %}Portfolio Admin | Projects{% endblock %}
+{% block title %}iTala | Inquiries{% endblock %}
 
-{% block nav_inquiries %}bg-blue-950 border-l-4 border-blue-500{% endblock %}
+{% block nav_inquiries %}active text-blue-500{% endblock %}
 
 {% block content %}
 <!-- Header -->
 <div class="flex items-center justify-between">
     <div>
-        <h2 class="text-3xl font-bold text-blue-300 glow-text">&gt; INQUIRIES</h2>
-        <p class="text-blue-600 terminal-text mt-1">Manage visitor messages and inquiries</p>
+        <h2 class="text-2xl font-bold text-gray-700">Inquiries</h2>
+        <p class="text-sm text-gray-400 mt-1">Manage visitor messages and inquiries</p>
     </div>
-    <div class="flex space-x-3">
-        <button class="bg-blue-950 hover:bg-blue-900 text-blue-300 px-4 py-3 rounded border border-blue-800 hover-glow transition-all font-semibold">
-            <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="flex items-center gap-3">
+        <button class="nm-flat bg-[#e8edf2] text-gray-500 font-medium px-4 py-2.5 rounded-xl flex items-center gap-2 hover:text-blue-500 transition-colors duration-200">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
             </svg>
             Filter
         </button>
-        <button class="bg-red-950 hover:bg-red-900 text-red-400 px-4 py-3 rounded border border-red-800 hover-glow transition-all font-semibold">
+        <button class="nm-flat bg-[#e8edf2] text-blue-500 font-medium px-4 py-2.5 rounded-xl hover:text-blue-600 transition-colors duration-200">
             Mark All Read
         </button>
     </div>
@@ -26,130 +26,140 @@
 
 <!-- Stats Overview -->
 <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-    <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg p-6 glow-border hover-glow transition-all">
+    <div class="nm-raised bg-[#e8edf2] rounded-2xl p-6">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-blue-600 text-sm uppercase tracking-wider">Total Inquiries</p>
-                <p class="text-3xl font-bold text-blue-300 mt-2 glow-text">47</p>
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Total Inquiries</p>
+                <p class="text-3xl font-bold text-gray-700 mt-2">47</p>
             </div>
-            <svg class="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-            </svg>
+            <div class="nm-inset bg-[#e8edf2] rounded-xl p-3">
+                <svg class="w-7 h-7 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+            </div>
         </div>
     </div>
-    
-    <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg p-6 glow-border hover-glow transition-all">
+
+    <div class="nm-raised bg-[#e8edf2] rounded-2xl p-6">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-blue-600 text-sm uppercase tracking-wider">Unread</p>
-                <p class="text-3xl font-bold text-blue-300 mt-2 glow-text">12</p>
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Unread</p>
+                <p class="text-3xl font-bold text-gray-700 mt-2">12</p>
             </div>
-            <div class="relative">
-                <svg class="w-12 h-12 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="nm-inset bg-[#e8edf2] rounded-xl p-3 relative">
+                <svg class="w-7 h-7 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
                 </svg>
-                <span class="absolute -top-1 -right-1 w-4 h-4 bg-yellow-500 rounded-full pulse-glow"></span>
+                <span class="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full"></span>
             </div>
         </div>
     </div>
-    
-    <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg p-6 glow-border hover-glow transition-all">
+
+    <div class="nm-raised bg-[#e8edf2] rounded-2xl p-6">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-blue-600 text-sm uppercase tracking-wider">Replied</p>
-                <p class="text-3xl font-bold text-blue-300 mt-2 glow-text">28</p>
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Replied</p>
+                <p class="text-3xl font-bold text-gray-700 mt-2">28</p>
             </div>
-            <svg class="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
+            <div class="nm-inset bg-[#e8edf2] rounded-xl p-3">
+                <svg class="w-7 h-7 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
         </div>
     </div>
-    
-    <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg p-6 glow-border hover-glow transition-all">
+
+    <div class="nm-raised bg-[#e8edf2] rounded-2xl p-6">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-blue-600 text-sm uppercase tracking-wider">Archived</p>
-                <p class="text-3xl font-bold text-blue-300 mt-2 glow-text">7</p>
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Archived</p>
+                <p class="text-3xl font-bold text-gray-700 mt-2">7</p>
             </div>
-            <svg class="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
-            </svg>
+            <div class="nm-inset bg-[#e8edf2] rounded-xl p-3">
+                <svg class="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
+                </svg>
+            </div>
         </div>
     </div>
 </div>
 
 <!-- Inquiries Table -->
-<div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg glow-border overflow-hidden">
-    <div class="p-6 border-b border-blue-900">
-        <div class="flex items-center justify-between">
-            <h3 class="text-xl font-bold text-blue-300 terminal-text">&gt; MESSAGE_QUEUE</h3>
-            <div class="flex items-center space-x-3">
-                <select class="bg-black bg-opacity-50 border border-blue-800 rounded px-3 py-2 text-blue-300 text-sm focus:outline-none focus:border-blue-500 terminal-text">
-                    <option>All Status</option>
-                    <option>Unread</option>
-                    <option>Read</option>
-                    <option>Replied</option>
-                    <option>Archived</option>
-                </select>
-                <input type="text" placeholder="Search messages..." class="bg-black bg-opacity-50 border border-blue-800 rounded px-3 py-2 text-blue-300 placeholder-blue-700 text-sm focus:outline-none focus:border-blue-500 terminal-text">
-            </div>
+<div class="nm-raised bg-[#e8edf2] rounded-2xl overflow-hidden">
+    <!-- Table Header -->
+    <div class="px-6 py-4 flex items-center justify-between border-b border-gray-200">
+        <h3 class="text-base font-bold text-gray-700">Message Queue</h3>
+        <div class="flex items-center gap-2">
+            <select class="nm-inset bg-[#e8edf2] rounded-xl px-3 py-2 text-gray-600 text-sm focus:outline-none">
+                <option>All Status</option>
+                <option>Unread</option>
+                <option>Read</option>
+                <option>Replied</option>
+                <option>Archived</option>
+            </select>
+            <input type="text" placeholder="Search messages..."
+                class="nm-inset bg-[#e8edf2] rounded-xl px-3 py-2 text-gray-600 placeholder-gray-300 text-sm focus:outline-none w-48">
         </div>
     </div>
-    
+
+    <!-- Table -->
     <div class="overflow-x-auto">
         <table class="w-full">
             <thead>
-                <tr class="border-b border-blue-900 bg-blue-950 bg-opacity-30">
-                    <th class="px-6 py-4 text-left text-blue-500 font-semibold text-sm uppercase tracking-wider">
-                        <input type="checkbox" class="w-4 h-4 bg-black border border-blue-800 rounded">
+                <tr class="border-b border-gray-200">
+                    <th class="px-6 py-3 text-left">
+                        <input type="checkbox" class="w-4 h-4 rounded accent-blue-500">
                     </th>
-                    <th class="px-6 py-4 text-left text-blue-500 font-semibold text-sm uppercase tracking-wider">From</th>
-                    <th class="px-6 py-4 text-left text-blue-500 font-semibold text-sm uppercase tracking-wider">Subject</th>
-                    <th class="px-6 py-4 text-left text-blue-500 font-semibold text-sm uppercase tracking-wider">Status</th>
-                    <th class="px-6 py-4 text-left text-blue-500 font-semibold text-sm uppercase tracking-wider">Date</th>
-                    <th class="px-6 py-4 text-left text-blue-500 font-semibold text-sm uppercase tracking-wider">Actions</th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">From</th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Subject</th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Status</th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Date</th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Actions</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-blue-900">
+            <tbody class="divide-y divide-gray-100">
+
                 <!-- Message 1 - Unread -->
-                <tr class="hover:bg-blue-950 hover:bg-opacity-30 transition-all bg-blue-900 bg-opacity-10">
+                <tr class="hover:bg-gray-50 transition-colors duration-150 bg-blue-50/40">
                     <td class="px-6 py-4">
-                        <input type="checkbox" class="w-4 h-4 bg-black border border-blue-800 rounded">
+                        <input type="checkbox" class="w-4 h-4 rounded accent-blue-500">
                     </td>
                     <td class="px-6 py-4">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 rounded-full bg-blue-900 flex items-center justify-center text-blue-300 font-bold glow-border">
+                        <div class="flex items-center gap-3">
+                            <div class="nm-inset bg-[#e8edf2] w-9 h-9 rounded-xl flex items-center justify-center text-blue-500 text-xs font-bold shrink-0">
                                 JD
                             </div>
                             <div>
-                                <p class="text-blue-300 font-semibold">John Doe</p>
-                                <p class="text-blue-600 text-xs terminal-text">john.doe@email.com</p>
+                                <p class="text-sm font-semibold text-gray-700">John Doe</p>
+                                <p class="text-xs text-gray-400">john.doe@email.com</p>
                             </div>
                         </div>
                     </td>
                     <td class="px-6 py-4">
-                        <p class="text-blue-300 font-semibold">Project Collaboration Inquiry</p>
-                        <p class="text-blue-600 text-sm truncate max-w-md">Hi, I'm interested in discussing a potential collaboration...</p>
+                        <p class="text-sm font-semibold text-gray-700">Project Collaboration Inquiry</p>
+                        <p class="text-xs text-gray-400 truncate max-w-xs">Hi, I'm interested in discussing a potential collaboration...</p>
                     </td>
                     <td class="px-6 py-4">
-                        <span class="px-3 py-1 bg-yellow-900 bg-opacity-30 text-yellow-400 rounded-full text-xs border border-yellow-700 pulse-glow">UNREAD</span>
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-600">
+                            <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span> Unread
+                        </span>
                     </td>
-                    <td class="px-6 py-4 text-blue-400 text-sm terminal-text">2026-01-15 10:30</td>
+                    <td class="px-6 py-4 text-xs text-gray-400">2026-01-15 10:30</td>
                     <td class="px-6 py-4">
-                        <div class="flex space-x-2">
-                            <button class="p-2 hover:bg-blue-900 rounded hover-glow transition-all" title="View">
-                                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-center gap-1">
+                            <button class="nm-flat bg-[#e8edf2] p-2 rounded-lg text-blue-400 hover:text-blue-500 transition-colors duration-200" title="View">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                                 </svg>
                             </button>
-                            <button class="p-2 hover:bg-green-900 rounded hover-glow transition-all" title="Reply">
-                                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <button class="nm-flat bg-[#e8edf2] p-2 rounded-lg text-green-400 hover:text-green-500 transition-colors duration-200" title="Reply">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
                                 </svg>
                             </button>
-                            <button class="p-2 hover:bg-red-900 rounded hover-glow transition-all" title="Delete">
-                                <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <button class="nm-flat bg-[#e8edf2] p-2 rounded-lg text-red-400 hover:text-red-500 transition-colors duration-200" title="Delete">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                 </svg>
                             </button>
@@ -158,44 +168,46 @@
                 </tr>
 
                 <!-- Message 2 - Read -->
-                <tr class="hover:bg-blue-950 hover:bg-opacity-30 transition-all">
+                <tr class="hover:bg-gray-50 transition-colors duration-150">
                     <td class="px-6 py-4">
-                        <input type="checkbox" class="w-4 h-4 bg-black border border-blue-800 rounded">
+                        <input type="checkbox" class="w-4 h-4 rounded accent-blue-500">
                     </td>
                     <td class="px-6 py-4">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 rounded-full bg-blue-900 flex items-center justify-center text-blue-300 font-bold glow-border">
+                        <div class="flex items-center gap-3">
+                            <div class="nm-inset bg-[#e8edf2] w-9 h-9 rounded-xl flex items-center justify-center text-purple-500 text-xs font-bold shrink-0">
                                 SA
                             </div>
                             <div>
-                                <p class="text-blue-300 font-semibold">Sarah Anderson</p>
-                                <p class="text-blue-600 text-xs terminal-text">sarah.a@company.com</p>
+                                <p class="text-sm font-medium text-gray-600">Sarah Anderson</p>
+                                <p class="text-xs text-gray-400">sarah.a@company.com</p>
                             </div>
                         </div>
                     </td>
                     <td class="px-6 py-4">
-                        <p class="text-blue-300">Job Opportunity</p>
-                        <p class="text-blue-600 text-sm truncate max-w-md">We have an exciting opportunity that matches your skills...</p>
+                        <p class="text-sm text-gray-600">Job Opportunity</p>
+                        <p class="text-xs text-gray-400 truncate max-w-xs">We have an exciting opportunity that matches your skills...</p>
                     </td>
                     <td class="px-6 py-4">
-                        <span class="px-3 py-1 bg-blue-900 bg-opacity-30 text-blue-400 rounded-full text-xs border border-blue-700">READ</span>
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-500">
+                            <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Read
+                        </span>
                     </td>
-                    <td class="px-6 py-4 text-blue-400 text-sm terminal-text">2026-01-14 16:45</td>
+                    <td class="px-6 py-4 text-xs text-gray-400">2026-01-14 16:45</td>
                     <td class="px-6 py-4">
-                        <div class="flex space-x-2">
-                            <button class="p-2 hover:bg-blue-900 rounded hover-glow transition-all" title="View">
-                                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-center gap-1">
+                            <button class="nm-flat bg-[#e8edf2] p-2 rounded-lg text-blue-400 hover:text-blue-500 transition-colors duration-200" title="View">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                                 </svg>
                             </button>
-                            <button class="p-2 hover:bg-green-900 rounded hover-glow transition-all" title="Reply">
-                                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <button class="nm-flat bg-[#e8edf2] p-2 rounded-lg text-green-400 hover:text-green-500 transition-colors duration-200" title="Reply">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
                                 </svg>
                             </button>
-                            <button class="p-2 hover:bg-red-900 rounded hover-glow transition-all" title="Delete">
-                                <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <button class="nm-flat bg-[#e8edf2] p-2 rounded-lg text-red-400 hover:text-red-500 transition-colors duration-200" title="Delete">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                 </svg>
                             </button>
@@ -204,44 +216,46 @@
                 </tr>
 
                 <!-- Message 3 - Replied -->
-                <tr class="hover:bg-blue-950 hover:bg-opacity-30 transition-all">
+                <tr class="hover:bg-gray-50 transition-colors duration-150">
                     <td class="px-6 py-4">
-                        <input type="checkbox" class="w-4 h-4 bg-black border border-blue-800 rounded">
+                        <input type="checkbox" class="w-4 h-4 rounded accent-blue-500">
                     </td>
                     <td class="px-6 py-4">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 rounded-full bg-blue-900 flex items-center justify-center text-blue-300 font-bold glow-border">
+                        <div class="flex items-center gap-3">
+                            <div class="nm-inset bg-[#e8edf2] w-9 h-9 rounded-xl flex items-center justify-center text-green-500 text-xs font-bold shrink-0">
                                 MJ
                             </div>
                             <div>
-                                <p class="text-blue-300 font-semibold">Michael Johnson</p>
-                                <p class="text-blue-600 text-xs terminal-text">m.johnson@startup.io</p>
+                                <p class="text-sm font-medium text-gray-600">Michael Johnson</p>
+                                <p class="text-xs text-gray-400">m.johnson@startup.io</p>
                             </div>
                         </div>
                     </td>
                     <td class="px-6 py-4">
-                        <p class="text-blue-300">Technical Consultation Request</p>
-                        <p class="text-blue-600 text-sm truncate max-w-md">Looking for expert advice on our architecture...</p>
+                        <p class="text-sm text-gray-600">Technical Consultation Request</p>
+                        <p class="text-xs text-gray-400 truncate max-w-xs">Looking for expert advice on our architecture...</p>
                     </td>
                     <td class="px-6 py-4">
-                        <span class="px-3 py-1 bg-green-900 bg-opacity-30 text-green-400 rounded-full text-xs border border-green-700">REPLIED</span>
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-600">
+                            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Replied
+                        </span>
                     </td>
-                    <td class="px-6 py-4 text-blue-400 text-sm terminal-text">2026-01-13 09:20</td>
+                    <td class="px-6 py-4 text-xs text-gray-400">2026-01-13 09:20</td>
                     <td class="px-6 py-4">
-                        <div class="flex space-x-2">
-                            <button class="p-2 hover:bg-blue-900 rounded hover-glow transition-all" title="View">
-                                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-center gap-1">
+                            <button class="nm-flat bg-[#e8edf2] p-2 rounded-lg text-blue-400 hover:text-blue-500 transition-colors duration-200" title="View">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                                 </svg>
                             </button>
-                            <button class="p-2 hover:bg-green-900 rounded hover-glow transition-all" title="Reply">
-                                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <button class="nm-flat bg-[#e8edf2] p-2 rounded-lg text-green-400 hover:text-green-500 transition-colors duration-200" title="Reply">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
                                 </svg>
                             </button>
-                            <button class="p-2 hover:bg-red-900 rounded hover-glow transition-all" title="Delete">
-                                <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <button class="nm-flat bg-[#e8edf2] p-2 rounded-lg text-red-400 hover:text-red-500 transition-colors duration-200" title="Delete">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                 </svg>
                             </button>
@@ -250,44 +264,46 @@
                 </tr>
 
                 <!-- Message 4 - Unread -->
-                <tr class="hover:bg-blue-950 hover:bg-opacity-30 transition-all bg-blue-900 bg-opacity-10">
+                <tr class="hover:bg-gray-50 transition-colors duration-150 bg-blue-50/40">
                     <td class="px-6 py-4">
-                        <input type="checkbox" class="w-4 h-4 bg-black border border-blue-800 rounded">
+                        <input type="checkbox" class="w-4 h-4 rounded accent-blue-500">
                     </td>
                     <td class="px-6 py-4">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 rounded-full bg-blue-900 flex items-center justify-center text-blue-300 font-bold glow-border">
+                        <div class="flex items-center gap-3">
+                            <div class="nm-inset bg-[#e8edf2] w-9 h-9 rounded-xl flex items-center justify-center text-orange-500 text-xs font-bold shrink-0">
                                 EW
                             </div>
                             <div>
-                                <p class="text-blue-300 font-semibold">Emily White</p>
-                                <p class="text-blue-600 text-xs terminal-text">emily.w@design.co</p>
+                                <p class="text-sm font-semibold text-gray-700">Emily White</p>
+                                <p class="text-xs text-gray-400">emily.w@design.co</p>
                             </div>
                         </div>
                     </td>
                     <td class="px-6 py-4">
-                        <p class="text-blue-300 font-semibold">Portfolio Design Feedback</p>
-                        <p class="text-blue-600 text-sm truncate max-w-md">Love your portfolio! Would like to discuss design patterns...</p>
+                        <p class="text-sm font-semibold text-gray-700">Portfolio Design Feedback</p>
+                        <p class="text-xs text-gray-400 truncate max-w-xs">Love your portfolio! Would like to discuss design patterns...</p>
                     </td>
                     <td class="px-6 py-4">
-                        <span class="px-3 py-1 bg-yellow-900 bg-opacity-30 text-yellow-400 rounded-full text-xs border border-yellow-700 pulse-glow">UNREAD</span>
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-600">
+                            <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span> Unread
+                        </span>
                     </td>
-                    <td class="px-6 py-4 text-blue-400 text-sm terminal-text">2026-01-15 08:15</td>
+                    <td class="px-6 py-4 text-xs text-gray-400">2026-01-15 08:15</td>
                     <td class="px-6 py-4">
-                        <div class="flex space-x-2">
-                            <button class="p-2 hover:bg-blue-900 rounded hover-glow transition-all" title="View">
-                                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-center gap-1">
+                            <button class="nm-flat bg-[#e8edf2] p-2 rounded-lg text-blue-400 hover:text-blue-500 transition-colors duration-200" title="View">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                                 </svg>
                             </button>
-                            <button class="p-2 hover:bg-green-900 rounded hover-glow transition-all" title="Reply">
-                                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <button class="nm-flat bg-[#e8edf2] p-2 rounded-lg text-green-400 hover:text-green-500 transition-colors duration-200" title="Reply">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
                                 </svg>
                             </button>
-                            <button class="p-2 hover:bg-red-900 rounded hover-glow transition-all" title="Delete">
-                                <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <button class="nm-flat bg-[#e8edf2] p-2 rounded-lg text-red-400 hover:text-red-500 transition-colors duration-200" title="Delete">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                 </svg>
                             </button>
@@ -296,68 +312,155 @@
                 </tr>
 
                 <!-- Message 5 - Read -->
-                <tr class="hover:bg-blue-950 hover:bg-opacity-30 transition-all">
+                <tr class="hover:bg-gray-50 transition-colors duration-150">
                     <td class="px-6 py-4">
-                        <input type="checkbox" class="w-4 h-4 bg-black border border-blue-800 rounded">
+                        <input type="checkbox" class="w-4 h-4 rounded accent-blue-500">
                     </td>
                     <td class="px-6 py-4">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 rounded-full bg-blue-900 flex items-center justify-center text-blue-300 font-bold glow-border">
+                        <div class="flex items-center gap-3">
+                            <div class="nm-inset bg-[#e8edf2] w-9 h-9 rounded-xl flex items-center justify-center text-indigo-500 text-xs font-bold shrink-0">
                                 DB
                             </div>
                             <div>
-                                <p class="text-blue-300 font-semibold">David Brown</p>
-                                <p class="text-blue-600 text-xs terminal-text">d.brown@tech.com</p>
+                                <p class="text-sm font-medium text-gray-600">David Brown</p>
+                                <p class="text-xs text-gray-400">d.brown@tech.com</p>
                             </div>
                         </div>
                     </td>
                     <td class="px-6 py-4">
-                        <p class="text-blue-300">Question About Your Project</p>
-                        <p class="text-blue-600 text-sm truncate max-w-md">I noticed your e-commerce platform project...</p>
+                        <p class="text-sm text-gray-600">Question About Your Project</p>
+                        <p class="text-xs text-gray-400 truncate max-w-xs">I noticed your e-commerce platform project...</p>
                     </td>
                     <td class="px-6 py-4">
-                        <span class="px-3 py-1 bg-blue-900 bg-opacity-30 text-blue-400 rounded-full text-xs border border-blue-700">READ</span>
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-500">
+                            <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Read
+                        </span>
                     </td>
-                    <td class="px-6 py-4 text-blue-400 text-sm terminal-text">2026-01-12 14:30</td>
+                    <td class="px-6 py-4 text-xs text-gray-400">2026-01-12 14:30</td>
                     <td class="px-6 py-4">
-                        <div class="flex space-x-2">
-                            <button class="p-2 hover:bg-blue-900 rounded hover-glow transition-all" title="View">
-                                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-center gap-1">
+                            <button class="nm-flat bg-[#e8edf2] p-2 rounded-lg text-blue-400 hover:text-blue-500 transition-colors duration-200" title="View">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                                 </svg>
                             </button>
-                            <button class="p-2 hover:bg-green-900 rounded hover-glow transition-all" title="Reply">
-                                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <button class="nm-flat bg-[#e8edf2] p-2 rounded-lg text-green-400 hover:text-green-500 transition-colors duration-200" title="Reply">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
                                 </svg>
                             </button>
-                            <button class="p-2 hover:bg-red-900 rounded hover-glow transition-all" title="Delete">
-                                <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <button class="nm-flat bg-[#e8edf2] p-2 rounded-lg text-red-400 hover:text-red-500 transition-colors duration-200" title="Delete">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                 </svg>
                             </button>
                         </div>
                     </td>
                 </tr>
+
             </tbody>
         </table>
     </div>
-    
+
     <!-- Pagination -->
-    <div class="p-4 border-t border-blue-900 flex items-center justify-between">
-        <p class="text-blue-500 text-sm terminal-text">Showing 1-5 of 47 inquiries</p>
-        <div class="flex space-x-2">
-            <button class="px-4 py-2 bg-blue-950 hover:bg-blue-900 text-blue-400 rounded border border-blue-800 hover-glow transition-all text-sm terminal-text">
-                Previous
-            </button>
-            <button class="px-4 py-2 bg-blue-900 text-blue-300 rounded border border-blue-700 text-sm terminal-text">1</button>
-            <button class="px-4 py-2 bg-blue-950 hover:bg-blue-900 text-blue-400 rounded border border-blue-800 hover-glow transition-all text-sm terminal-text">2</button>
-            <button class="px-4 py-2 bg-blue-950 hover:bg-blue-900 text-blue-400 rounded border border-blue-800 hover-glow transition-all text-sm terminal-text">3</button>
-            <button class="px-4 py-2 bg-blue-950 hover:bg-blue-900 text-blue-400 rounded border border-blue-800 hover-glow transition-all text-sm terminal-text">
-                Next
-            </button>
+    <div class="px-6 py-4 flex items-center justify-between border-t border-gray-200">
+        <p class="text-sm text-gray-400">Showing 1–5 of 47 inquiries</p>
+        <div class="flex items-center gap-2">
+            <button class="nm-flat bg-[#e8edf2] text-gray-500 text-xs font-medium px-3 py-1.5 rounded-lg hover:text-blue-500 transition-colors duration-200">Previous</button>
+            <button class="nm-inset bg-[#e8edf2] text-blue-500 text-xs font-semibold px-3 py-1.5 rounded-lg">1</button>
+            <button class="nm-flat bg-[#e8edf2] text-gray-500 text-xs font-medium px-3 py-1.5 rounded-lg hover:text-blue-500 transition-colors duration-200">2</button>
+            <button class="nm-flat bg-[#e8edf2] text-gray-500 text-xs font-medium px-3 py-1.5 rounded-lg hover:text-blue-500 transition-colors duration-200">3</button>
+            <button class="nm-flat bg-[#e8edf2] text-gray-500 text-xs font-medium px-3 py-1.5 rounded-lg hover:text-blue-500 transition-colors duration-200">Next</button>
         </div>
     </div>
+</div>
+
+<!-- ── Issue Reports ───────────────────────────────────────────────── -->
+<div class="nm-raised bg-[#e8edf2] rounded-2xl overflow-hidden">
+    <div class="px-6 py-5 border-b border-gray-200 flex items-center justify-between">
+        <div>
+            <h3 class="text-base font-semibold text-gray-600 flex items-center gap-2">
+                <svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+                Issue Reports
+            </h3>
+            <p class="text-xs text-gray-400 mt-0.5">Bugs and feature requests submitted via the Profile page</p>
+        </div>
+        <div class="flex items-center gap-3 text-xs">
+            <span class="nm-inset bg-[#e8edf2] rounded-lg px-3 py-1.5 text-gray-500">
+                Total: <span class="font-bold text-gray-600">{{ total_reports }}</span>
+            </span>
+            <span class="nm-inset bg-[#e8edf2] rounded-lg px-3 py-1.5 text-orange-400">
+                Open: <span class="font-bold">{{ open_reports }}</span>
+            </span>
+            <span class="nm-inset bg-[#e8edf2] rounded-lg px-3 py-1.5 text-green-400">
+                Resolved: <span class="font-bold">{{ resolved_reports }}</span>
+            </span>
+        </div>
+    </div>
+
+    {% if issue_reports %}
+    <div class="divide-y divide-gray-100">
+        {% for report in issue_reports %}
+        <div class="px-6 py-4 flex items-start gap-4 hover:bg-[#e0e5ea] transition-colors">
+            <!-- Category icon -->
+            <div class="nm-inset bg-[#e8edf2] rounded-xl p-2.5 shrink-0">
+                {% if report.category == 'bug' %}
+                    <span class="text-base leading-none">🐛</span>
+                {% elif report.category == 'feature' %}
+                    <span class="text-base leading-none">✨</span>
+                {% else %}
+                    <span class="text-base leading-none">💬</span>
+                {% endif %}
+            </div>
+            <!-- Content -->
+            <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 flex-wrap mb-1">
+                    <p class="text-sm font-semibold text-gray-700 truncate">{{ report.title }}</p>
+                    <!-- Category badge -->
+                    {% if report.category == 'bug' %}
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-500">Bug</span>
+                    {% elif report.category == 'feature' %}
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-500">Feature</span>
+                    {% else %}
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-500">Other</span>
+                    {% endif %}
+                    <!-- Status badge -->
+                    {% if report.status == 'open' %}
+                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-600">
+                            <span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span> Open
+                        </span>
+                    {% elif report.status == 'resolved' %}
+                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-600">
+                            <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span> Resolved
+                        </span>
+                    {% else %}
+                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">
+                            <span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span> Closed
+                        </span>
+                    {% endif %}
+                </div>
+                <p class="text-xs text-gray-500 leading-relaxed line-clamp-2">{{ report.description }}</p>
+                <p class="text-xs text-gray-300 mt-1.5">
+                    Reported by <span class="text-gray-400 font-medium">@{{ report.manager.username|default:"unknown" }}</span>
+                    &middot; {{ report.created_at|date:"M d, Y H:i" }}
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="flex flex-col items-center justify-center py-16 text-center">
+        <div class="nm-inset bg-[#e8edf2] rounded-2xl p-6 mb-4">
+            <svg class="w-10 h-10 text-gray-300 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+        </div>
+        <p class="text-sm font-semibold text-gray-500">No issue reports yet</p>
+        <p class="text-xs text-gray-400 mt-1">Reports submitted from the Profile page will appear here</p>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

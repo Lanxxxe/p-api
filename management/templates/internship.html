@@ -1,18 +1,22 @@
 {% extends 'base.html' %}
 
-{% block title %}Portfolio Admin | Internship Tracker{% endblock %}
+{% block title %}iTala | Internship Tracker{% endblock %}
 
-{% block nav_internship %}bg-blue-950 border-l-4 border-blue-500{% endblock %}
+{% block nav_internship %}active text-blue-500{% endblock %}
 
 {% block content %}
-<!-- Display messages -->
+
+<!-- Flash Messages -->
 {% if messages %}
-<div class="mb-6">
+<div class="mb-6 flex flex-col gap-3">
     {% for message in messages %}
-    <div class="bg-{% if message.tags == 'error' %}red{% else %}green{% endif %}-900 bg-opacity-30 border border-{% if message.tags == 'error' %}red{% else %}green{% endif %}-700 rounded p-4 text-{% if message.tags == 'error' %}red{% else %}green{% endif %}-400 text-sm terminal-text relative">
-        <span class="font-bold">{{ message.tags|upper }}:</span> {{ message }}
-        <button onclick="this.parentElement.remove()" class="absolute top-2 right-2 text-{% if message.tags == 'error' %}red{% else %}green{% endif %}-400 hover:text-{% if message.tags == 'error' %}red{% else %}green{% endif %}-200 transition-all">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="nm-raised bg-[#e8edf2] rounded-2xl px-5 py-4 flex items-start justify-between gap-4
+        {% if message.tags == 'error' %}border-l-4 border-red-400{% else %}border-l-4 border-green-400{% endif %}">
+        <p class="text-sm font-medium {% if message.tags == 'error' %}text-red-500{% else %}text-green-600{% endif %}">
+            {{ message }}
+        </p>
+        <button onclick="this.parentElement.remove()" class="shrink-0 text-gray-400 hover:text-gray-600 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
@@ -22,172 +26,277 @@
 {% endif %}
 
 {% csrf_token %}
-    <!-- Header -->
-    <div class="flex items-center justify-between mb-6">
-        <div>
-            <h2 class="text-3xl font-bold text-blue-300 glow-text">&gt; INTERNSHIP_TRACKER</h2>
-            <p class="text-blue-600 terminal-text mt-1">Track your daily internship activities and progress</p>
-        </div>
-        <button onclick="window.location.href='{% url 'internship-log-create' %}'" class="bg-blue-900 hover:bg-blue-800 text-blue-300 px-6 py-3 rounded border border-blue-700 hover-glow transition-all font-semibold pulse-glow">
-            <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-            </svg>
-            Create Log
-        </button>
-    </div>
 
-    <!-- Stats Overview -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-        <!-- Total Days -->
-        <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg p-6 glow-border hover-glow transition-all">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-blue-600 text-sm terminal-text uppercase">Rendered</p>
-                    <h3 id="totalDays" class="text-3xl font-bold text-green-400 mt-2">{{ total_hours }}</h3>
-                </div>
-                <div class="bg-blue-900 bg-opacity-30 p-3 rounded-lg">
-                    <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                </div>
+<!-- Header -->
+<div class="flex items-center justify-between">
+    <div>
+        <h2 class="text-2xl font-bold text-gray-700">Internship Tracker</h2>
+        <p class="text-sm text-gray-400 mt-1">Track your daily internship activities and progress</p>
+    </div>
+    <a href="{% url 'internship-log-create' %}"
+       class="nm-flat bg-[#e8edf2] text-blue-500 font-semibold px-5 py-2.5 rounded-xl flex items-center gap-2 hover:text-blue-600 transition-colors duration-200">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        Create Log
+    </a>
+</div>
+
+<!-- Stats Overview -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+    <!-- Hours Rendered -->
+    <div class="nm-raised bg-[#e8edf2] rounded-2xl p-6">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Hours Rendered</p>
+                <p class="text-3xl font-bold text-gray-700 mt-2">{{ total_hours }}</p>
             </div>
-        </div>
-        
-        <!-- Total Hours -->
-        <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg p-6 glow-border hover-glow transition-all">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-blue-600 text-sm terminal-text uppercase">Total Hours Needed</p>
-                    <h3 id="totalHours" class="text-3xl font-bold text-blue-300 mt-2"> {{ total_hours_needed }} </h3>
-                </div>
-                <div class="bg-blue-900 bg-opacity-30 p-3 rounded-lg">
-                    <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Current Status -->
-        <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg p-6 glow-border hover-glow transition-all">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-blue-600 text-sm terminal-text uppercase">Remaining Hours</p>
-                    <h3 id="status" class="text-3xl font-bold text-blue-300 mt-2">{{ remaining_hours }}</h3>
-                </div>
-                <div class="bg-green-900 bg-opacity-30 p-3 rounded-lg">
-                    <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                    </svg>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Photos Uploaded -->
-        <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg p-6 glow-border hover-glow transition-all">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-blue-600 text-sm terminal-text uppercase">Estimated Date of Completion</p>
-                    <h3 id="totalPhotos" class="text-3xl font-bold text-blue-300 mt-2">{{ completion_date }}</h3>
-                </div>
-                <div class="bg-blue-900 bg-opacity-30 p-3 rounded-lg">
-                    <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                    </svg>
-                </div>
+            <div class="nm-inset bg-[#e8edf2] rounded-xl p-3">
+                <svg class="w-7 h-7 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
             </div>
         </div>
     </div>
 
-    <!-- Daily Logs Table -->
-    <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg glow-border overflow-hidden">
-        <!-- Table Header -->
-        <div class="bg-black bg-opacity-60 px-6 py-4 flex items-center justify-between border-b border-blue-900">
-            <h3 class="text-lg font-bold text-blue-300 terminal-text">&gt; DAILY_LOGS</h3>
-            <div class="flex items-center space-x-3">
-                <form method="GET" action="" class="flex items-center space-x-3">
-                    <select name="week" id="filterRange" class="bg-black bg-opacity-50 border border-blue-800 rounded px-3 py-1.5 text-blue-300 text-sm focus:outline-none focus:border-blue-500 terminal-text">
-                        {% for week in weeks %}
-                        <option value="{{ week.value }}" {% if selected_week == week.value %}selected{% endif %}>
-                            {{ week.label }}
-                        </option>
-                        {% endfor %}
-                    </select>
-                    <button type="submit" class="bg-blue-950 hover:bg-blue-900 border border-blue-800 rounded px-3 py-1.5 text-blue-400 text-sm transition-all">
-                        Filter
-                    </button>
-                </form>
+    <!-- Total Hours Needed -->
+    <div class="nm-raised bg-[#e8edf2] rounded-2xl p-6">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Total Hours Needed</p>
+                <p class="text-3xl font-bold text-gray-700 mt-2">{{ total_hours_needed }}</p>
+            </div>
+            <div class="nm-inset bg-[#e8edf2] rounded-xl p-3">
+                <svg class="w-7 h-7 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
             </div>
         </div>
-        
-        <!-- Table Content -->
-        <div class="overflow-x-auto">
-            <table class="w-full">
-                <thead class="bg-blue-900 bg-opacity-20">
-                    <tr>
-                        <th class="text-left p-4 text-blue-500 text-sm font-semibold terminal-text uppercase">Date</th>
-                        <th class="text-left p-4 text-blue-500 text-sm font-semibold terminal-text uppercase">Time In</th>
-                        <th class="text-left p-4 text-blue-500 text-sm font-semibold terminal-text uppercase">Time Out</th>
-                        <th class="text-left p-4 text-blue-500 text-sm font-semibold terminal-text uppercase">Hours</th>
-                        <th class="text-left p-4 text-blue-500 text-sm font-semibold terminal-text uppercase">Notes Preview</th>
-                        <th class="text-left p-4 text-blue-500 text-sm font-semibold terminal-text uppercase">Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="logsTableBody" class="divide-y divide-blue-900">
-                    {% if logs %}
-                        <!-- Render logs -->
-                        {% for log in logs %}
-                        <tr class="hover:bg-blue-900 hover:bg-opacity-10 transition-all cursor-pointer" data-log-id="{{ log.id }}">
-                            <td class="p-4 text-blue-300 terminal-text">{{ log.date|date:"M d, Y" }}</td>
-                            <td class="p-4 text-blue-300 terminal-text">{{ log.time_in|time:"H:i" }}</td>
-                            <td class="p-4 text-blue-300 terminal-text">{{ log.time_out|time:"H:i" }}</td>
-                            <td class="p-4 text-blue-300 terminal-text">{{ log.hours|floatformat:2 }}</td>
-                            <td class="p-4 text-blue-300 terminal-text">{{ log.notes|truncatechars:50 }}</td>
-                            <td class="p-4 text-blue-300 terminal-text">
-                                <a href="{% url 'internship-log-update' log.id %}" class="bg-blue-900 hover:bg-blue-800 text-blue-300 px-3 py-1 rounded border border-blue-700 transition-all text-sm inline-block">
+    </div>
+
+    <!-- Remaining Hours -->
+    <div class="nm-raised bg-[#e8edf2] rounded-2xl p-6">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Remaining Hours</p>
+                <p class="text-3xl font-bold text-gray-700 mt-2">{{ remaining_hours }}</p>
+            </div>
+            <div class="nm-inset bg-[#e8edf2] rounded-xl p-3">
+                <svg class="w-7 h-7 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estimated Completion -->
+    <div class="nm-raised bg-[#e8edf2] rounded-2xl p-6">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Est. Completion</p>
+                <p class="text-2xl font-bold text-gray-700 mt-2">{{ completion_date }}</p>
+            </div>
+            <div class="nm-inset bg-[#e8edf2] rounded-xl p-3">
+                <svg class="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Daily Logs Table -->
+<div class="nm-raised bg-[#e8edf2] rounded-2xl overflow-hidden">
+    <!-- Table Header -->
+    <div class="px-6 py-4 flex items-center justify-between border-b border-gray-200">
+        <h3 class="text-base font-bold text-gray-700">Daily Logs</h3>
+        <div class="flex items-center gap-2">
+            <form method="GET" action="" class="flex items-center gap-2">
+                <select name="week" id="filterRange"
+                    class="nm-inset bg-[#e8edf2] rounded-xl px-3 py-2 text-gray-600 text-sm focus:outline-none">
+                    {% for week in weeks %}
+                    <option value="{{ week.value }}" {% if selected_week == week.value %}selected{% endif %}>
+                        {{ week.label }}
+                    </option>
+                    {% endfor %}
+                </select>
+                <button type="submit"
+                    class="nm-flat bg-[#e8edf2] text-blue-500 text-sm font-medium px-4 py-2 rounded-xl hover:text-blue-600 transition-colors duration-200">
+                    Filter
+                </button>
+            </form>
+            <button type="button" id="summarize-btn" onclick="summarizeWeek()"
+                class="nm-flat bg-[#e8edf2] text-purple-500 text-sm font-medium px-4 py-2 rounded-xl hover:text-purple-600 transition-colors duration-200 flex items-center gap-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                <span id="summarize-label">Summarize Week</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Weekly Summary Panel -->
+    <div id="summary-panel" class="hidden border-b border-gray-200 px-6 py-5">
+        <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                <h4 class="text-sm font-semibold text-gray-600">Weekly Summary</h4>
+            </div>
+            <button onclick="closeSummary()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div id="summary-content"
+            class="nm-inset bg-[#e8edf2] rounded-xl px-5 py-4 text-sm text-gray-700 leading-relaxed whitespace-pre-wrap min-h-[80px]">
+        </div>
+    </div>
+
+    <!-- Table Content -->
+    <div class="overflow-x-auto">
+        <table class="w-full">
+            <thead>
+                <tr class="border-b border-gray-200">
+                    <th class="text-left px-6 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">Date</th>
+                    <th class="text-left px-6 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">Time In</th>
+                    <th class="text-left px-6 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">Time Out</th>
+                    <th class="text-left px-6 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">Hours</th>
+                    <th class="text-left px-6 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">Notes</th>
+                    <th class="text-left px-6 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                {% if logs %}
+                    {% for log in logs %}
+                    <tr class="hover:bg-gray-50 transition-colors duration-150"
+                        data-log-id="{{ log.id }}"
+                        data-date="{{ log.date|date:'F d, Y' }}"
+                        data-day="{{ log.date|date:'l' }}"
+                        data-time-in="{{ log.time_in|time:'g:i A' }}"
+                        data-time-out="{{ log.time_out|time:'g:i A' }}"
+                        data-hours="{{ log.hours|floatformat:2 }}"
+                        data-notes="{{ log.notes|escapejs }}">
+                        <td class="px-6 py-4 text-sm font-medium text-gray-700">{{ log.date|date:"M d, Y" }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-500">{{ log.time_in|time:"H:i" }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-500">{{ log.time_out|time:"H:i" }}</td>
+                        <td class="px-6 py-4">
+                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-600">
+                                {{ log.hours|floatformat:2 }} hrs
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-400 max-w-xs truncate">{{ log.notes|truncatechars:50 }}</td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-2">
+                                <a href="{% url 'internship-log-detail' log.id %}"
+                                    class="nm-flat bg-[#e8edf2] text-gray-500 text-xs font-medium px-3 py-1.5 rounded-lg hover:text-blue-500 transition-colors duration-200">
+                                    View
+                                </a>
+                                <a href="{% url 'internship-log-update' log.id %}"
+                                   class="nm-flat bg-[#e8edf2] text-blue-500 text-xs font-medium px-3 py-1.5 rounded-lg hover:text-blue-600 transition-colors duration-200">
                                     Edit
                                 </a>
-                                <form method="POST" action="{% url 'internship-log-delete' log.id %}" class="inline" onsubmit="return confirm('Are you sure you want to delete this log?')">
+                                <form method="POST" action="{% url 'internship-log-delete' log.id %}" class="inline"
+                                      onsubmit="return confirm('Are you sure you want to delete this log?')">
                                     {% csrf_token %}
-                                    <button type="submit" class="bg-red-900 hover:bg-red-800 text-red-300 px-3 py-1 rounded border border-red-700 transition-all text-sm">
+                                    <button type="submit"
+                                        class="nm-flat bg-[#e8edf2] text-red-400 text-xs font-medium px-3 py-1.5 rounded-lg hover:text-red-500 transition-colors duration-200">
                                         Delete
                                     </button>
                                 </form>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    {% else %}
-                        <!-- Empty state -->
-                        <tr id="emptyRow" class="hidden">
-                            <td colspan="7" class="p-8 text-center text-blue-500 terminal-text">
-                                No logs found. Click "Log Today" to add your first entry.
-                            </td>
-                        </tr>
-                    {% endif %}
-                </tbody>
-            </table>
-        </div>
-        
-        <!-- Pagination -->
-        <div class="bg-black bg-opacity-40 px-6 py-4 flex items-center justify-between border-t border-blue-900">
-            <div id="paginationInfo" class="text-sm text-blue-600 terminal-text">
-                Showing {{ logs.start_index }} to {{ logs.end_index }} of {{ logs.paginator.count }} logs
-            </div>
-            <div id="paginationControls" class="flex space-x-2">
-                {% if logs.has_previous %}
-                    <a href="?week={{ selected_week }}&page=1" class="bg-blue-950 hover:bg-blue-900 border border-blue-800 rounded px-3 py-1.5 text-blue-400 text-sm transition-all">First</a>
-                    <a href="?week={{ selected_week }}&page={{ logs.previous_page_number }}" class="bg-blue-950 hover:bg-blue-900 border border-blue-800 rounded px-3 py-1.5 text-blue-400 text-sm transition-all">Previous</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="6" class="px-6 py-16 text-center">
+                            <div class="nm-inset bg-[#e8edf2] rounded-2xl p-8 max-w-sm mx-auto">
+                                <svg class="w-12 h-12 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                                </svg>
+                                <p class="text-sm font-medium text-gray-400">No logs found</p>
+                                <p class="text-xs text-gray-300 mt-1">Click "Create Log" to add your first entry.</p>
+                            </div>
+                        </td>
+                    </tr>
                 {% endif %}
-                
-                <span class="px-3 py-1.5 text-blue-300 text-sm terminal-text">Page {{ logs.number }} of {{ logs.paginator.num_pages }}</span>
-                
-                {% if logs.has_next %}
-                    <a href="?week={{ selected_week }}&page={{ logs.next_page_number }}" class="bg-blue-950 hover:bg-blue-900 border border-blue-800 rounded px-3 py-1.5 text-blue-400 text-sm transition-all">Next</a>
-                    <a href="?week={{ selected_week }}&page={{ logs.paginator.num_pages }}" class="bg-blue-950 hover:bg-blue-900 border border-blue-800 rounded px-3 py-1.5 text-blue-400 text-sm transition-all">Last</a>
-                {% endif %}
-            </div>
-        </div>
+            </tbody>
+        </table>
     </div>
 
+    <!-- Pagination -->
+    <div class="px-6 py-4 flex items-center justify-between border-t border-gray-200">
+        <p class="text-sm text-gray-400">
+            Showing {{ logs.start_index }} to {{ logs.end_index }} of {{ logs.paginator.count }} logs
+        </p>
+        <div class="flex items-center gap-2">
+            {% if logs.has_previous %}
+                <a href="?week={{ selected_week }}&page=1"
+                   class="nm-flat bg-[#e8edf2] text-gray-500 text-xs font-medium px-3 py-1.5 rounded-lg hover:text-blue-500 transition-colors duration-200">First</a>
+                <a href="?week={{ selected_week }}&page={{ logs.previous_page_number }}"
+                   class="nm-flat bg-[#e8edf2] text-gray-500 text-xs font-medium px-3 py-1.5 rounded-lg hover:text-blue-500 transition-colors duration-200">Previous</a>
+            {% endif %}
+
+            <span class="nm-inset bg-[#e8edf2] text-gray-600 text-xs font-semibold px-4 py-1.5 rounded-lg">
+                {{ logs.number }} / {{ logs.paginator.num_pages }}
+            </span>
+
+            {% if logs.has_next %}
+                <a href="?week={{ selected_week }}&page={{ logs.next_page_number }}"
+                   class="nm-flat bg-[#e8edf2] text-gray-500 text-xs font-medium px-3 py-1.5 rounded-lg hover:text-blue-500 transition-colors duration-200">Next</a>
+                <a href="?week={{ selected_week }}&page={{ logs.paginator.num_pages }}"
+                   class="nm-flat bg-[#e8edf2] text-gray-500 text-xs font-medium px-3 py-1.5 rounded-lg hover:text-blue-500 transition-colors duration-200">Last</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+const SUMMARIZE_URL = "{% url 'internship-summarize-week' %}";
+const WEEK_START    = '{{ selected_week }}';
+const CSRF          = '{{ csrf_token }}';
+
+async function summarizeWeek() {
+    const btn     = document.getElementById('summarize-btn');
+    const label   = document.getElementById('summarize-label');
+    const panel   = document.getElementById('summary-panel');
+    const content = document.getElementById('summary-content');
+
+    btn.disabled = true;
+    btn.classList.add('opacity-70', 'cursor-not-allowed');
+    label.textContent = 'Summarizing...';
+    panel.classList.add('hidden');
+
+    try {
+        const resp = await fetch(SUMMARIZE_URL, {
+            method: 'POST',
+            headers: { 'X-CSRFToken': CSRF, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ week_start: WEEK_START }),
+        });
+        const data = await resp.json();
+
+        if (!resp.ok) { alert(data.error || 'Summarization failed.'); return; }
+
+        content.textContent = data.summary;
+        panel.classList.remove('hidden');
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } catch (err) {
+        alert('An error occurred: ' + err.message);
+    } finally {
+        btn.disabled = false;
+        btn.classList.remove('opacity-70', 'cursor-not-allowed');
+        label.textContent = 'Summarize Week';
+    }
+}
+
+function closeSummary() {
+    document.getElementById('summary-panel').classList.add('hidden');
+}
+</script>
+
 {% endblock %}
+
 

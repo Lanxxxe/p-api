@@ -7,7 +7,6 @@ class InternshipLogSerializer(serializers.Serializer):
     time_in = serializers.TimeField()
     time_out = serializers.TimeField()
     notes = serializers.CharField(max_length=500, allow_blank=True)
-    photos = serializers.ImageField(required=False, allow_null=True)
 
 
 class ProjectSerializer(serializers.Serializer):

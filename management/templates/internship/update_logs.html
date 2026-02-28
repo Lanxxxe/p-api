@@ -1,18 +1,26 @@
 {% extends 'base.html' %}
 
-{% block title %}Edit Internship Log{% endblock %}
+{% block title %}iTala | Edit Internship Log{% endblock %}
 
-{% block nav_internship %}bg-blue-950 border-l-4 border-blue-500{% endblock %}
+{% block nav_internship %}active text-blue-500{% endblock %}
 
 {% block content %}
-<!-- Display messages -->
+
+<!-- Flash Messages -->
 {% if messages %}
-<div class="mb-6">
+<div class="mb-6 space-y-3">
     {% for message in messages %}
-    <div class="bg-{% if message.tags == 'error' %}red{% else %}green{% endif %}-900 bg-opacity-30 border border-{% if message.tags == 'error' %}red{% else %}green{% endif %}-700 rounded p-4 text-{% if message.tags == 'error' %}red{% else %}green{% endif %}-400 text-sm terminal-text relative">
-        <span class="font-bold">{{ message.tags|upper }}:</span> {{ message }}
-        <button onclick="this.parentElement.remove()" class="absolute top-2 right-2 text-{% if message.tags == 'error' %}red{% else %}green{% endif %}-400 hover:text-{% if message.tags == 'error' %}red{% else %}green{% endif %}-200 transition-all">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="nm-raised bg-[#e8edf2] rounded-2xl px-5 py-4 flex items-start gap-3 border-l-4 {% if message.tags == 'error' %}border-red-400{% else %}border-green-400{% endif %} relative">
+        <svg class="w-5 h-5 mt-0.5 shrink-0 {% if message.tags == 'error' %}text-red-400{% else %}text-green-500{% endif %}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {% if message.tags == 'error' %}
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            {% else %}
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            {% endif %}
+        </svg>
+        <p class="text-sm {% if message.tags == 'error' %}text-red-500{% else %}text-green-600{% endif %}">{{ message }}</p>
+        <button onclick="this.parentElement.remove()" class="absolute top-3 right-4 text-gray-300 hover:text-gray-500 transition-colors duration-200">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
@@ -24,133 +32,105 @@
 <!-- Header -->
 <div class="flex items-center justify-between mb-6">
     <div>
-        <h2 class="text-3xl font-bold text-blue-300 glow-text">&gt; EDIT_INTERNSHIP_LOG</h2>
-        <p class="text-blue-600 terminal-text mt-1">Update your internship log details</p>
+        <h2 class="text-2xl font-bold text-gray-700">Edit Internship Log</h2>
+        <p class="text-sm text-gray-400 mt-1">Update your internship log details</p>
     </div>
-    <a href="{% url 'internship' %}" class="bg-blue-950 hover:bg-blue-900 text-blue-300 px-6 py-3 rounded border border-blue-800 hover-glow transition-all font-semibold">
-        <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <a href="{% url 'internship' %}"
+        class="nm-flat bg-[#e8edf2] inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-gray-500 hover:text-blue-500 transition-colors duration-200">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
         </svg>
         Back to Logs
     </a>
 </div>
 
-<!-- Form -->
-<div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg glow-border overflow-hidden">
-    <div class="bg-black bg-opacity-60 px-6 py-4 border-b border-blue-900">
-        <h3 class="text-lg font-bold text-blue-300 terminal-text">&gt; LOG_DETAILS</h3>
+<!-- Form Card -->
+<div class="nm-raised bg-[#e8edf2] rounded-2xl overflow-hidden">
+
+    <!-- Card Header -->
+    <div class="px-6 py-4 border-b border-gray-200">
+        <h3 class="text-base font-semibold text-gray-700">Log Details</h3>
     </div>
-    
-    <form method="POST" action="{% url 'internship-log-update' log.id %}" enctype="multipart/form-data" class="p-6 space-y-6">
+
+    <form method="POST" action="{% url 'internship-log-update' log.id %}" class="p-6 space-y-6">
         {% csrf_token %}
-        
+
         <!-- Date -->
         <div>
-            <label for="log_date" class="block text-blue-500 text-sm font-semibold mb-2 terminal-text uppercase">
-                &gt; Date *
+            <label for="log_date" class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                Date <span class="text-red-400">*</span>
             </label>
-            <input 
-                type="date" 
-                id="log_date" 
+            <input
+                type="date"
+                id="log_date"
                 name="log_date"
                 value="{{ log.date|date:'Y-m-d' }}"
                 required
-                class="w-full bg-black bg-opacity-50 border border-blue-800 rounded px-4 py-3 text-blue-300 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all terminal-text"
+                class="w-full nm-inset bg-[#e8edf2] rounded-xl px-4 py-3 text-sm text-gray-700 focus:outline-none transition-all duration-200"
             >
         </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Time In -->
+
+        <!-- Time In / Time Out -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
             <div>
-                <label for="time_in" class="block text-blue-500 text-sm font-semibold mb-2 terminal-text uppercase">
-                    &gt; Time In *
+                <label for="time_in" class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                    Time In <span class="text-red-400">*</span>
                 </label>
-                <input 
-                    type="time" 
-                    id="time_in" 
+                <input
+                    type="time"
+                    id="time_in"
                     name="time_in"
                     value="{{ log.time_in|time:'H:i' }}"
                     required
-                    class="w-full bg-black bg-opacity-50 border border-blue-800 rounded px-4 py-3 text-blue-300 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all terminal-text"
+                    class="w-full nm-inset bg-[#e8edf2] rounded-xl px-4 py-3 text-sm text-gray-700 focus:outline-none transition-all duration-200"
                 >
             </div>
-            
-            <!-- Time Out -->
+
             <div>
-                <label for="time_out" class="block text-blue-500 text-sm font-semibold mb-2 terminal-text uppercase">
-                    &gt; Time Out *
+                <label for="time_out" class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                    Time Out <span class="text-red-400">*</span>
                 </label>
-                <input 
-                    type="time" 
-                    id="time_out" 
+                <input
+                    type="time"
+                    id="time_out"
                     name="time_out"
                     value="{{ log.time_out|time:'H:i' }}"
                     required
-                    class="w-full bg-black bg-opacity-50 border border-blue-800 rounded px-4 py-3 text-blue-300 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all terminal-text"
+                    class="w-full nm-inset bg-[#e8edf2] rounded-xl px-4 py-3 text-sm text-gray-700 focus:outline-none transition-all duration-200"
                 >
             </div>
         </div>
-        
+
         <!-- Notes -->
         <div>
-            <label for="notes" class="block text-blue-500 text-sm font-semibold mb-2 terminal-text uppercase">
-                &gt; Daily Notes *
+            <label for="notes" class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                Daily Notes <span class="text-red-400">*</span>
             </label>
-            <textarea 
-                id="notes" 
-                name="notes" 
+            <textarea
+                id="notes"
+                name="notes"
                 required
                 rows="8"
-                class="w-full bg-black bg-opacity-50 border border-blue-800 rounded px-4 py-3 text-blue-300 placeholder-blue-700 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all terminal-text"
                 placeholder="Describe your activities, tasks completed, learnings, challenges faced..."
+                class="w-full nm-inset bg-[#e8edf2] rounded-xl px-4 py-3 text-sm text-gray-700 placeholder-gray-300 focus:outline-none transition-all duration-200 resize-none"
             >{{ log.notes }}</textarea>
         </div>
-        
-        <!-- Photo Upload -->
-        <div>
-            <label for="photos" class="block text-blue-500 text-sm font-semibold mb-2 terminal-text uppercase">
-                &gt; Upload Photos (Optional - leave empty to keep existing)
-            </label>
-            {% if log.photos %}
-            <div class="mb-3 text-blue-400 text-sm terminal-text">
-                Current photo: <a href="{{ log.photos.url }}" target="_blank" class="text-blue-300 hover:text-blue-200 underline">View</a>
-            </div>
-            {% endif %}
-            <div class="border-2 border-dashed border-blue-800 rounded-lg p-6 text-center hover:border-blue-600 transition-all cursor-pointer">
-                <input 
-                    type="file" 
-                    id="photos" 
-                    name="photos" 
-                    multiple
-                    accept="image/*"
-                    class="hidden"
-                    onchange="displayFileNames(this)"
-                >
-                <label for="photos" class="cursor-pointer">
-                    <svg class="w-12 h-12 text-blue-600 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                    </svg>
-                    <p class="text-blue-400 terminal-text">Click to upload new photos</p>
-                    <p class="text-blue-600 text-sm mt-1 terminal-text">PNG, JPG up to 10MB each</p>
-                </label>
-            </div>
-            <div id="fileNames" class="mt-2 text-blue-400 text-sm terminal-text"></div>
-        </div>
-        
-        <!-- Action Buttons -->
-        <div class="flex space-x-4 pt-4 border-t border-blue-900">
-            <button 
+
+        <!-- Actions -->
+        <div class="flex gap-4 pt-4 border-t border-gray-200">
+            <button
                 type="submit"
-                class="flex-1 bg-blue-900 hover:bg-blue-800 text-blue-300 font-semibold py-3 px-6 rounded border border-blue-700 transition-all transform hover:scale-105 pulse-glow terminal-text uppercase tracking-wider"
+                class="flex-1 nm-flat bg-[#e8edf2] rounded-xl py-3 text-sm font-semibold text-blue-500 hover:text-blue-600 transition-colors duration-200 flex items-center justify-center gap-2"
             >
-                <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
                 Update Log
             </button>
-            <a 
+            <a
                 href="{% url 'internship' %}"
-                class="flex-1 bg-blue-950 hover:bg-blue-900 text-blue-400 font-semibold py-3 px-6 rounded border border-blue-800 hover-glow transition-all terminal-text uppercase tracking-wider text-center"
+                class="flex-1 nm-flat bg-[#e8edf2] rounded-xl py-3 text-sm font-semibold text-gray-400 hover:text-gray-600 transition-colors duration-200 flex items-center justify-center gap-2"
             >
                 Cancel
             </a>
@@ -160,16 +140,4 @@
 
 {% endblock %}
 
-{% block extra_scripts %}
-<script>
-function displayFileNames(input) {
-    const fileNamesDiv = document.getElementById('fileNames');
-    if (input.files.length > 0) {
-        const fileNames = Array.from(input.files).map(f => f.name).join(', ');
-        fileNamesDiv.textContent = `Selected: ${fileNames}`;
-    } else {
-        fileNamesDiv.textContent = '';
-    }
-}
-</script>
-{% endblock %}
+{% block extra_scripts %}{% endblock %}

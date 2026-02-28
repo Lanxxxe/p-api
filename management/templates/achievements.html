@@ -1,211 +1,151 @@
 {% extends 'base.html' %}
 
-{% block title %}Portfolio Admin | Projects{% endblock %}
+{% block title %}iTala | Achievements{% endblock %}
 
-{% block nav_achievements %}bg-blue-950 border-l-4 border-blue-500{% endblock %}
+{% block nav_achievements %}active text-blue-500{% endblock %}
 
 {% block content %}
 <!-- Header -->
 <div class="flex items-center justify-between">
     <div>
-        <h2 class="text-3xl font-bold text-blue-300 glow-text">&gt; ACHIEVEMENTS</h2>
-        <p class="text-blue-600 terminal-text mt-1">Manage all your achievements</p>
+        <h2 class="text-2xl font-bold text-gray-700">Achievements</h2>
+        <p class="text-sm text-gray-400 mt-1">Manage all your achievements</p>
     </div>
-    <a href="{% url 'add_achievement' %}" class="bg-blue-900 hover:bg-blue-800 text-blue-300 px-6 py-3 rounded border border-blue-700 hover-glow transition-all font-semibold">
-        + ADD NEW ACHIEVEMENT
+    <a href="{% url 'add_achievement' %}"
+       class="nm-flat bg-[#e8edf2] text-blue-500 font-semibold px-5 py-2.5 rounded-xl flex items-center gap-2 hover:text-blue-600 transition-colors duration-200">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        Add Achievement
     </a>
 </div>
 
+<!-- Messages -->
+{% if messages %}
+<div class="space-y-2">
+    {% for message in messages %}
+    <div class="flex items-start justify-between gap-4 px-4 py-3 rounded-xl text-sm font-medium
+        {% if message.tags == 'error' %}bg-red-50 text-red-600 border border-red-200{% else %}bg-green-50 text-green-600 border border-green-200{% endif %}">
+        <span><span class="font-bold">{% if message.tags == 'error' %}Error:{% else %}Success:{% endif %}</span> {{ message }}</span>
+        <button onclick="this.parentElement.remove()" class="shrink-0 text-inherit opacity-60 hover:opacity-100 transition-opacity">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
 <!-- Stats Overview -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg p-6 glow-border hover-glow transition-all">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="nm-raised bg-[#e8edf2] rounded-2xl p-6">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-blue-600 text-sm uppercase tracking-wider">Total Achievements</p>
-                <p class="text-3xl font-bold text-blue-300 mt-2 glow-text">12</p>
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Total Achievements</p>
+                <p class="text-3xl font-bold text-gray-700 mt-2">{{ total }}</p>
             </div>
-            <svg class="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
-            </svg>
+            <div class="nm-inset bg-[#e8edf2] rounded-xl p-3">
+                <svg class="w-7 h-7 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                </svg>
+            </div>
         </div>
     </div>
-    
-    <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg p-6 glow-border hover-glow transition-all">
+
+    <div class="nm-raised bg-[#e8edf2] rounded-2xl p-6">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-blue-600 text-sm uppercase tracking-wider">Featured</p>
-                <p class="text-3xl font-bold text-blue-300 mt-2 glow-text">5</p>
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Categories</p>
+                <p class="text-3xl font-bold text-gray-700 mt-2">{{ total_categories }}</p>
             </div>
-            <svg class="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
-            </svg>
-        </div>
-    </div>
-    
-    <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg p-6 glow-border hover-glow transition-all">
-        <div class="flex items-center justify-between">
-            <div>
-                <p class="text-blue-600 text-sm uppercase tracking-wider">Categories</p>
-                <p class="text-3xl font-bold text-blue-300 mt-2 glow-text">4</p>
+            <div class="nm-inset bg-[#e8edf2] rounded-xl p-3">
+                <svg class="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                </svg>
             </div>
-            <svg class="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-            </svg>
         </div>
     </div>
 </div>
 
 <!-- Achievements Grid -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <!-- Achievement Card 1 -->
-    <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg overflow-hidden glow-border hover-glow transition-all">
-        <div class="bg-gradient-to-br from-blue-900 to-blue-950 p-8 flex items-center justify-center border-b border-blue-800">
-            <svg class="w-20 h-20 text-blue-400 pulse-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
-            </svg>
-        </div>
-        <div class="p-6">
-            <div class="flex items-center justify-between mb-3">
-                <h3 class="text-lg font-bold text-blue-300">Full Stack Developer</h3>
-                <span class="px-2 py-1 bg-blue-900 bg-opacity-30 text-blue-400 rounded text-xs border border-blue-700">2025</span>
-            </div>
-            <p class="text-blue-500 text-sm mb-4">Completed full-stack development certification with React and Node.js expertise.</p>
-            <div class="flex items-center justify-between mb-4">
-                <span class="px-3 py-1 bg-green-900 bg-opacity-30 text-green-400 rounded-full text-xs border border-green-700">FEATURED</span>
-                <span class="text-blue-600 text-xs terminal-text">Certification</span>
-            </div>
-            <div class="flex space-x-2">
-                <button class="flex-1 bg-blue-900 hover:bg-blue-800 text-blue-300 px-4 py-2 rounded border border-blue-700 hover-glow transition-all text-sm">
-                    Edit
-                </button>
-                <button class="flex-1 bg-red-950 hover:bg-red-900 text-red-400 px-4 py-2 rounded border border-red-800 hover-glow transition-all text-sm">
-                    Delete
-                </button>
-            </div>
-        </div>
-    </div>
 
-    <!-- Achievement Card 2 -->
-    <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg overflow-hidden glow-border hover-glow transition-all">
-        <div class="bg-gradient-to-br from-blue-900 to-blue-950 p-8 flex items-center justify-center border-b border-blue-800">
-            <svg class="w-20 h-20 text-blue-400 pulse-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-            </svg>
+    {% if achievements %}
+        {% for achievement in achievements %}
+        <div class="nm-raised bg-[#e8edf2] rounded-2xl overflow-hidden flex flex-col">
+            <div class="nm-inset bg-[#e8edf2] mx-6 mt-6 rounded-2xl p-6 flex items-center justify-center">
+                <svg class="w-16 h-16 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                </svg>
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+                <div class="flex items-start justify-between mb-2">
+                    <h3 class="text-base font-bold text-gray-700 leading-tight">{{ achievement.event }}</h3>
+                    <span class="nm-inset bg-[#e8edf2] text-gray-500 text-xs font-semibold px-2.5 py-1 rounded-lg ml-2 shrink-0">{{ achievement.date_achieved|date:"Y" }}</span>
+                </div>
+                <p class="text-xs text-blue-400 font-semibold mb-2">{{ achievement.ranked }}</p>
+                <p class="text-sm text-gray-400 mb-4 flex-1 line-clamp-2">{{ achievement.summary }}</p>
+                <div class="flex items-center justify-between mb-4">
+                    {% if achievement.category %}
+                    <div class="flex flex-wrap gap-1">
+                        {% for cat in achievement.category %}
+                        <span class="nm-inset bg-[#e8edf2] text-xs text-purple-400 font-medium px-2 py-0.5 rounded-lg">{{ cat }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <span class="text-xs text-gray-300">No category</span>
+                    {% endif %}
+                    <span class="text-xs text-gray-400 shrink-0 ml-2">{{ achievement.location }}</span>
+                </div>
+                <div class="flex gap-2">
+                    <a href="{% url 'edit_achievement' achievement.id %}"
+                        class="flex-1 nm-flat bg-[#e8edf2] text-blue-500 text-sm font-medium py-2 rounded-xl text-center hover:text-blue-600 transition-colors duration-200">Edit</a>
+                    <form method="POST" action="{% url 'delete_achievement' achievement.id %}" class="flex-1"
+                        onsubmit="return confirm('Delete {{ achievement.event }}? This cannot be undone.')">
+                        {% csrf_token %}
+                        <button type="submit"
+                            class="w-full nm-flat bg-[#e8edf2] text-red-400 text-sm font-medium py-2 rounded-xl hover:text-red-500 transition-colors duration-200">Delete</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="p-6">
-            <div class="flex items-center justify-between mb-3">
-                <h3 class="text-lg font-bold text-blue-300">AWS Certified</h3>
-                <span class="px-2 py-1 bg-blue-900 bg-opacity-30 text-blue-400 rounded text-xs border border-blue-700">2024</span>
-            </div>
-            <p class="text-blue-500 text-sm mb-4">AWS Solutions Architect Associate certification achieved.</p>
-            <div class="flex items-center justify-between mb-4">
-                <span class="px-3 py-1 bg-yellow-900 bg-opacity-30 text-yellow-400 rounded-full text-xs border border-yellow-700">ACTIVE</span>
-                <span class="text-blue-600 text-xs terminal-text">Cloud Computing</span>
-            </div>
-            <div class="flex space-x-2">
-                <button class="flex-1 bg-blue-900 hover:bg-blue-800 text-blue-300 px-4 py-2 rounded border border-blue-700 hover-glow transition-all text-sm">
-                    Edit
-                </button>
-                <button class="flex-1 bg-red-950 hover:bg-red-900 text-red-400 px-4 py-2 rounded border border-red-800 hover-glow transition-all text-sm">
-                    Delete
-                </button>
+        {% endfor %}
+    {% else %}
+        <!-- Empty State -->
+        <div class="col-span-full">
+            <div class="nm-inset bg-[#e8edf2] rounded-2xl p-12 flex flex-col items-center gap-4 text-center">
+                <div class="nm-raised bg-[#e8edf2] rounded-full p-5">
+                    <svg class="w-10 h-10 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-gray-600 font-semibold">No achievements yet</p>
+                    <p class="text-sm text-gray-400 mt-1">Record your first milestone or award to get started.</p>
+                </div>
+                <a href="{% url 'add_achievement' %}"
+                    class="nm-flat bg-[#e8edf2] text-blue-500 font-semibold text-sm px-5 py-2.5 rounded-xl hover:text-blue-600 transition-colors duration-200">
+                    + Add Achievement
+                </a>
             </div>
         </div>
-    </div>
+    {% endif %}
 
-    <!-- Achievement Card 3 -->
-    <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg overflow-hidden glow-border hover-glow transition-all">
-        <div class="bg-gradient-to-br from-blue-900 to-blue-950 p-8 flex items-center justify-center border-b border-blue-800">
-            <svg class="w-20 h-20 text-blue-400 pulse-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
-            </svg>
-        </div>
-        <div class="p-6">
-            <div class="flex items-center justify-between mb-3">
-                <h3 class="text-lg font-bold text-blue-300">Top Contributor</h3>
-                <span class="px-2 py-1 bg-blue-900 bg-opacity-30 text-blue-400 rounded text-xs border border-blue-700">2025</span>
-            </div>
-            <p class="text-blue-500 text-sm mb-4">Recognized as top contributor on GitHub with 500+ contributions.</p>
-            <div class="flex items-center justify-between mb-4">
-                <span class="px-3 py-1 bg-green-900 bg-opacity-30 text-green-400 rounded-full text-xs border border-green-700">FEATURED</span>
-                <span class="text-blue-600 text-xs terminal-text">Open Source</span>
-            </div>
-            <div class="flex space-x-2">
-                <button class="flex-1 bg-blue-900 hover:bg-blue-800 text-blue-300 px-4 py-2 rounded border border-blue-700 hover-glow transition-all text-sm">
-                    Edit
-                </button>
-                <button class="flex-1 bg-red-950 hover:bg-red-900 text-red-400 px-4 py-2 rounded border border-red-800 hover-glow transition-all text-sm">
-                    Delete
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Achievement Card 4 -->
-    <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg overflow-hidden glow-border hover-glow transition-all">
-        <div class="bg-gradient-to-br from-blue-900 to-blue-950 p-8 flex items-center justify-center border-b border-blue-800">
-            <svg class="w-20 h-20 text-blue-400 pulse-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-        </div>
-        <div class="p-6">
-            <div class="flex items-center justify-between mb-3">
-                <h3 class="text-lg font-bold text-blue-300">Agile Practitioner</h3>
-                <span class="px-2 py-1 bg-blue-900 bg-opacity-30 text-blue-400 rounded text-xs border border-blue-700">2024</span>
-            </div>
-            <p class="text-blue-500 text-sm mb-4">Certified Scrum Master with extensive agile methodology experience.</p>
-            <div class="flex items-center justify-between mb-4">
-                <span class="px-3 py-1 bg-yellow-900 bg-opacity-30 text-yellow-400 rounded-full text-xs border border-yellow-700">ACTIVE</span>
-                <span class="text-blue-600 text-xs terminal-text">Project Management</span>
-            </div>
-            <div class="flex space-x-2">
-                <button class="flex-1 bg-blue-900 hover:bg-blue-800 text-blue-300 px-4 py-2 rounded border border-blue-700 hover-glow transition-all text-sm">
-                    Edit
-                </button>
-                <button class="flex-1 bg-red-950 hover:bg-red-900 text-red-400 px-4 py-2 rounded border border-red-800 hover-glow transition-all text-sm">
-                    Delete
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Achievement Card 5 -->
-    <div class="bg-blue-950 bg-opacity-20 border border-blue-800 rounded-lg overflow-hidden glow-border hover-glow transition-all">
-        <div class="bg-gradient-to-br from-blue-900 to-blue-950 p-8 flex items-center justify-center border-b border-blue-800">
-            <svg class="w-20 h-20 text-blue-400 pulse-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-            </svg>
-        </div>
-        <div class="p-6">
-            <div class="flex items-center justify-between mb-3">
-                <h3 class="text-lg font-bold text-blue-300">Mobile Expert</h3>
-                <span class="px-2 py-1 bg-blue-900 bg-opacity-30 text-blue-400 rounded text-xs border border-blue-700">2025</span>
-            </div>
-            <p class="text-blue-500 text-sm mb-4">React Native and Flutter development mastery achieved.</p>
-            <div class="flex items-center justify-between mb-4">
-                <span class="px-3 py-1 bg-green-900 bg-opacity-30 text-green-400 rounded-full text-xs border border-green-700">FEATURED</span>
-                <span class="text-blue-600 text-xs terminal-text">Mobile Development</span>
-            </div>
-            <div class="flex space-x-2">
-                <button class="flex-1 bg-blue-900 hover:bg-blue-800 text-blue-300 px-4 py-2 rounded border border-blue-700 hover-glow transition-all text-sm">
-                    Edit
-                </button>
-                <button class="flex-1 bg-red-950 hover:bg-red-900 text-red-400 px-4 py-2 rounded border border-red-800 hover-glow transition-all text-sm">
-                    Delete
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Add Achievement Card -->
-    <div class="bg-blue-950 bg-opacity-20 border-2 border-dashed border-blue-800 rounded-lg flex items-center justify-center hover-glow transition-all cursor-pointer group">
+    <!-- Add Achievement Card (always shown) -->
+    {% if achievements %}
+    <a href="{% url 'add_achievement' %}" class="nm-raised bg-[#e8edf2] rounded-2xl flex items-center justify-center min-h-[260px] group hover:text-blue-500 transition-colors duration-200">
         <div class="text-center p-8">
-            <svg class="w-20 h-20 text-blue-600 mx-auto mb-4 group-hover:text-blue-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-            </svg>
-            <p class="text-blue-400 font-semibold group-hover:text-blue-300 transition-colors terminal-text">Add New Achievement</p>
-            <p class="text-blue-700 text-xs mt-2">Click to create</p>
+            <div class="nm-inset bg-[#e8edf2] rounded-2xl p-5 inline-flex mb-4">
+                <svg class="w-10 h-10 text-gray-300 group-hover:text-blue-400 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
+            </div>
+            <p class="font-semibold text-gray-400 group-hover:text-blue-500 transition-colors duration-200">Add New Achievement</p>
+            <p class="text-xs text-gray-300 mt-1">Click to create</p>
         </div>
-    </div>
+    </a>
+    {% endif %}
+
 </div>
 {% endblock %}
